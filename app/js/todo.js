@@ -82,6 +82,7 @@ $(function() {
 		editMode = false;
 		DOM.$input.val('');
 		DOM.$input.focus();
+		DOM.$button.text('Add');
 
 	});
 
@@ -97,6 +98,7 @@ $(function() {
 
 		DOM.$input.val(todo);
 		DOM.$input.focus();
+		DOM.$button.text('Edit');
 
 		editMode = true;
 		itemId = $(this).parent('li').prevAll().length;
