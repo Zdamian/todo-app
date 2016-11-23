@@ -11,6 +11,9 @@
   more info: http://www.findmebyip.com/litmus/#css3-properties
 
 ------------------------------------------------------------- */
+body {
+  background-color: #fff3e8; }
+
 .glyphicon {
   margin-left: 10px;
   float: right;
