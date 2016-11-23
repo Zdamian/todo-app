@@ -37,3 +37,10 @@ body {
   color: white; }
   .btn:hover {
     background-color: #fb9a39; }
+
+.btn_edit {
+  background-color: #7dbb00;
+  border: none;
+  color: white; }
+  .btn_edit:hover {
+    background-color: #5b8800; }

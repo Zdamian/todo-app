@@ -37,3 +37,13 @@ body {
 		background-color: $baseColor;
 	}
 }
+
+.btn_edit {
+	background-color: $baseColor2;
+	border: none;
+	color: white;
+
+	&:hover {
+		background-color: $baseBackgroundColor4;
+	}
+}

@@ -43,6 +43,8 @@ $(function() {
 			editMode = false;
 			DOM.$input.val('');
 			DOM.$input.focus();
+			DOM.$button.text('Add');
+			DOM.$button.removeClass('btn_edit').addClass('btn');
 		}
 
 	});
@@ -82,6 +84,8 @@ $(function() {
 		editMode = false;
 		DOM.$input.val('');
 		DOM.$input.focus();
+		DOM.$button.text('Add');
+		DOM.$button.removeClass('btn_edit').addClass('btn');
 
 	});
 
@@ -97,6 +101,7 @@ $(function() {
 
 		DOM.$input.val(todo);
 		DOM.$input.focus();
+		DOM.$button.text('Edit').removeClass('btn').addClass('btn_edit');
 
 		editMode = true;
 		itemId = $(this).parent('li').prevAll().length;
