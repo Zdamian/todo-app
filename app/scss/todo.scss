@@ -1,2 +1,35 @@
 @import 'mixins/css3mixins';
 @import 'variables';
+
+.glyphicon {
+	margin-left: 10px;
+	float: right;
+	cursor: pointer;
+}
+
+.glyphicon-pencil {
+	color: green;
+}
+
+.jumbotron {
+	background-color: $baseBackgroundColor;
+}
+
+.list-group-item {
+	background-color: $baseBackgroundColor2;
+	font-size: 16px;
+
+	&:hover {
+		background-color: $baseColor;
+	}
+}
+
+.btn {
+	background-color: $baseBackgroundColor;
+	border: none;
+	color: white;
+
+	&:hover {
+		background-color: $baseColor;
+	}
+}

@@ -26,15 +26,15 @@ $(function() {
 
 				if (todo.trim()) {
 
-					var $item = $('<li/>');
+					var $item = $('<li class="list-group-item"></li>');
 					var $todo = $('<span class="app-todo"></span>');
-					var $edit = $('<span class="app-edit">E</span>');
-					var $del = $('<span class="app-delete">X</span>');
+					var $edit = $('<span class="app-edit glyphicon glyphicon-pencil"></span>');
+					var $del = $('<span class="app-delete glyphicon glyphicon-trash"></span>');
 
 					$todo.text(todo);
 					$item.append($todo);
-					$item.append($edit);
 					$item.append($del);
+					$item.append($edit);
 
 					DOM.$list.append($item);
 				}
@@ -63,17 +63,16 @@ $(function() {
 
 			if (todo.trim()) {
 
-				var $item = $('<li/>');
-
+				var $item = $('<li class="list-group-item"></li>');
 				var $todo = $('<span class="app-todo"></span>');
-				var $edit = $('<span class="app-edit">E</span>');
-				var $del = $('<span class="app-delete">X</span>');
+				var $edit = $('<span class="app-edit glyphicon glyphicon-pencil"></span>');
+				var $del = $('<span class="app-delete glyphicon glyphicon-trash"></span>');
 
 				$todo.text(todo);
 
 				$item.append($todo);
-				$item.append($edit);
 				$item.append($del);
+				$item.append($edit);
 
 				DOM.$list.append($item);
 
