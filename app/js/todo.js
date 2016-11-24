@@ -26,12 +26,14 @@ $(function() {
 
 				if (todo.trim()) {
 
+					var $check = $('<input type="checkbox" class="check">');
 					var $item = $('<li class="list-group-item"></li>');
 					var $todo = $('<span class="app-todo"></span>');
 					var $edit = $('<span class="app-edit glyphicon glyphicon-pencil"></span>');
 					var $del = $('<span class="app-delete glyphicon glyphicon-trash"></span>');
 
 					$todo.text(todo);
+					$item.prepend($check);
 					$item.append($todo);
 					$item.append($del);
 					$item.append($edit);
@@ -65,13 +67,14 @@ $(function() {
 
 			if (todo.trim()) {
 
+				var $check = $('<input type="checkbox" class="check">');
 				var $item = $('<li class="list-group-item"></li>');
 				var $todo = $('<span class="app-todo"></span>');
 				var $edit = $('<span class="app-edit glyphicon glyphicon-pencil"></span>');
 				var $del = $('<span class="app-delete glyphicon glyphicon-trash"></span>');
 
 				$todo.text(todo);
-
+				$item.prepend($check);
 				$item.append($todo);
 				$item.append($del);
 				$item.append($edit);
