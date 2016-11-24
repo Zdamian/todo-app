@@ -118,13 +118,14 @@ $(function() {
     // Funkcja dodawająca klase gdy checkbox jest aktywne i usuwająca klase gdy checkbox jest nie aktywne
     DOM.$list.on('click', '.app-check', function(e) {
 
-        if ($(this).prop("checked") == true) {
+        if ($(this).prop("checked")) {
             $(this).parents('li').addClass('checkbox_active');
 
-        } else if ($(this).prop("checked") == false) {
+        } else {
             $(this).parents('li').removeClass('checkbox_active');
 
         }
+        
     });
 
 });
