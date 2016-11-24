@@ -113,13 +113,7 @@ $(function() {
 
 	DOM.$list.on('click', '.app-check', function() {
 
-		$(this).parent('li').addClass('checkbox_active');
-
-		DOM.$list.on('click', '.app-check', function() {
-
-			$(this).parent('li').removeClass('checkbox_active');
-
-		});
+		$(this).parent('li').toggleClass('checkbox_active');
 
 	});
 

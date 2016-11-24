@@ -21,7 +21,7 @@ body {
 
 .list-group-item {
 	background-color: $baseBackgroundColor2;
-	font-size: 16px;
+	font-size: 18px;
 
 	&:hover {
 		background-color: $baseColor;
@@ -55,4 +55,6 @@ body {
 
 .contents {
 	padding-left: 15px;
+    font-family: $baseFontFamily;
+    font-weight: 600;
 }
