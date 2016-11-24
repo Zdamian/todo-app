@@ -111,10 +111,15 @@ $(function() {
 
 	});
 
-	DOM.$list.on('click', '.app-check', function() {
+	DOM.$list.on('click', '.app-check', function(e) {
 
-		$(this).parent('li').toggleClass('checkbox_active');
+		if ($(this).prop("checked") == true) {
+			$(this).parents('li').addClass('checkbox_active');
 
+		} else if ($(this).prop("checked") == false) {
+			$(this).parents('li').removeClass('checkbox_active');
+
+		} 
 	});
 
 });
