@@ -21,7 +21,7 @@ body {
 
 .list-group-item {
 	background-color: $baseBackgroundColor2;
-	font-size: 16px;
+	font-size: 18px;
 
 	&:hover {
 		background-color: $baseColor;
@@ -46,4 +46,15 @@ body {
 	&:hover {
 		background-color: $baseBackgroundColor4;
 	}
+}
+
+.checkbox_active {
+	text-decoration: line-through;
+	opacity: 0.4;
+}
+
+.contents {
+	padding-left: 15px;
+    font-family: $baseFontFamily;
+    font-weight: 600;
 }

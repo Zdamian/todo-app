@@ -27,7 +27,7 @@ body {
 
 .list-group-item {
   background-color: #fdcd9d;
-  font-size: 16px; }
+  font-size: 18px; }
   .list-group-item:hover {
     background-color: #fb9a39; }
 
@@ -44,3 +44,12 @@ body {
   color: white; }
   .btn_edit:hover {
     background-color: #5b8800; }
+
+.checkbox_active {
+  text-decoration: line-through;
+  opacity: 0.4; }
+
+.contents {
+  padding-left: 15px;
+  font-family: "Times New Roman", Times, serif;
+  font-weight: 600; }
