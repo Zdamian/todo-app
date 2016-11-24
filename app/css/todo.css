@@ -44,3 +44,10 @@ body {
   color: white; }
   .btn_edit:hover {
     background-color: #5b8800; }
+
+.checkbox_active {
+  text-decoration: line-through;
+  opacity: 0.4; }
+
+.contents {
+  padding-left: 15px; }

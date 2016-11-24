@@ -47,3 +47,12 @@ body {
 		background-color: $baseBackgroundColor4;
 	}
 }
+
+.checkbox_active {
+	text-decoration: line-through;
+	opacity: 0.4;
+}
+
+.contents {
+	padding-left: 15px;
+}

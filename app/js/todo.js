@@ -26,9 +26,9 @@ $(function() {
 
 				if (todo.trim()) {
 
-					var $check = $('<input type="checkbox" class="check">');
+					var $check = $('<input type="checkbox" class="app-check">');
 					var $item = $('<li class="list-group-item"></li>');
-					var $todo = $('<span class="app-todo"></span>');
+					var $todo = $('<span class="app-todo contents"></span>');
 					var $edit = $('<span class="app-edit glyphicon glyphicon-pencil"></span>');
 					var $del = $('<span class="app-delete glyphicon glyphicon-trash"></span>');
 
@@ -67,9 +67,9 @@ $(function() {
 
 			if (todo.trim()) {
 
-				var $check = $('<input type="checkbox" class="check">');
+				var $check = $('<input type="checkbox" class="app-check">');
 				var $item = $('<li class="list-group-item"></li>');
-				var $todo = $('<span class="app-todo"></span>');
+				var $todo = $('<span class="app-todo contents"></span>');
 				var $edit = $('<span class="app-edit glyphicon glyphicon-pencil"></span>');
 				var $del = $('<span class="app-delete glyphicon glyphicon-trash"></span>');
 
@@ -108,6 +108,18 @@ $(function() {
 
 		editMode = true;
 		itemId = $(this).parent('li').prevAll().length;
+
+	});
+
+	DOM.$list.on('click', '.app-check', function() {
+
+		$(this).parent('li').addClass('checkbox_active');
+
+		DOM.$list.on('click', '.app-check', function() {
+
+			$(this).parent('li').removeClass('checkbox_active');
+
+		});
 
 	});
 
