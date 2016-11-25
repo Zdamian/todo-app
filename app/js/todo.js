@@ -141,7 +141,7 @@ $(function() {
         DOM.$input.val('');
         DOM.$input.focus();
         DOM.$button.text('Add');
-        DOM.$button.removeClass('btn_edit').addClass('btn');
+        DOM.$button.removeClass('btn-success').addClass('btn-primary');
 
     });
 
@@ -163,7 +163,7 @@ $(function() {
 
         DOM.$input.val(todo);
         DOM.$input.focus();
-        DOM.$button.text('Edit').removeClass('btn').addClass('btn_edit');
+        DOM.$button.text('Edit').removeClass('btn-primary').addClass('btn-success');
 
         editMode = true;
         itemId = $(this).parent('li').prevAll().length;
@@ -182,8 +182,7 @@ $(function() {
             todos[id].checked = true;
         } else {
             $(this).removeClass('checkbox_active');
-            $(this).find('.app-check').removeClass('glyphicon-check');
-            $(this).find('.app-check').addClass('glyphicon-unchecked');
+            $(this).find('.app-check').removeClass('glyphicon-check').addClass('glyphicon-unchecked');
 
             todos[id].checked = false;
         }

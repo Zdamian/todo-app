@@ -6,12 +6,7 @@ body {
 }
 
 .glyphicon {
-	margin-left: 10px;
 	cursor: pointer;
-}
-
-.glyphicon-pencil {
-	color: green;
 }
 
 .jumbotron {
@@ -28,11 +23,19 @@ body {
 
 		.edit, .delete {
 			display: inline-block;
+			color: black;
 		}
 	}
 
 	.edit, .delete  {
 		display: none;
+
+		&:hover {
+			background-color: white;
+			padding: 5px;
+			top: 8px;
+			border-radius: 5px;
+		}
 	}
 
 	.check, .edit, .delete {
@@ -42,48 +45,44 @@ body {
 	}
 
 	.check {
-		left: 2px;
+		left: 10px;
 	}
 
 	.contents {
 		left: 25px;
 		padding-left: 25px;
     	font-family: $baseFontFamily;
+    	font-size: 20px;
     	font-weight: 600;
 	}
 
 	.delete {
-		right: 12px;
+		right: 10px;
+
+		&:hover {
+			color: red;
+		}
 	}
 
 	.edit {
-		right: 40px;
-	}
-}
+		right: 47px;
 
-
-
-.btn {
-	background-color: $baseBackgroundColor;
-	border: none;
-	color: white;
-
-	&:hover {
-		background-color: $baseColor;
-	}
-}
-
-.btn_edit {
-	background-color: $baseColor2;
-	border: none;
-	color: white;
-
-	&:hover {
-		background-color: $baseBackgroundColor4;
+		&:hover {
+			color: $baseColor2;
+		}
 	}
 }
 
 .checkbox_active {
 	text-decoration: line-through;
 	opacity: 0.4;
+}
+
+.well {
+	border: 1px solid grey;
+	background-color: white;
+}
+
+.bg-primary {
+	margin-bottom: 15px;
 }
