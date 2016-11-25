@@ -37,6 +37,21 @@ $(function() {
         }
 
         DOM.$list.append($item);
+
+        $del.hide();
+        $edit.hide();
+
+        DOM.$list.on('mouseenter', '.list-group-item', function(e) {
+
+            $(this).find('.app-edit').show();
+            $(this).find('.app-delete').show();
+        });
+
+        DOM.$list.on('mouseleave', '.list-group-item', function(e) {
+
+            $(this).find('.app-edit').hide();
+            $(this).find('.app-delete').hide();
+        });
     });
 
     // Funkcja dodawająca nowy element listy na wciśnięcie klawisza 'enter'
@@ -78,6 +93,9 @@ $(function() {
                     $item.append($edit);
 
                     DOM.$list.append($item);
+
+                    $del.hide();
+                    $edit.hide();
                 }
             }
 
@@ -130,6 +148,9 @@ $(function() {
 
                 DOM.$list.append($item);
 
+                $del.hide();
+                $edit.hide();
+
             }
         }
 
@@ -181,7 +202,7 @@ $(function() {
 
         todos[id].checked = $(this).prop("checked");
         updateLocalStorage();
-        
+
     });
 
 });
