@@ -16,7 +16,6 @@ body {
 
 .glyphicon {
   margin-left: 10px;
-  float: right;
   cursor: pointer; }
 
 .glyphicon-pencil {
@@ -26,10 +25,30 @@ body {
   background-color: #ca6704; }
 
 .list-group-item {
+  position: relative;
   background-color: #fdcd9d;
   font-size: 18px; }
   .list-group-item:hover {
     background-color: #fb9a39; }
+    .list-group-item:hover .edit, .list-group-item:hover .delete {
+      display: inline-block; }
+  .list-group-item .edit, .list-group-item .delete {
+    display: none; }
+  .list-group-item .check, .list-group-item .edit, .list-group-item .delete {
+    position: absolute;
+    top: 13px;
+    font-size: 20px; }
+  .list-group-item .check {
+    left: 2px; }
+  .list-group-item .contents {
+    left: 25px;
+    padding-left: 25px;
+    font-family: "Times New Roman", Times, serif;
+    font-weight: 600; }
+  .list-group-item .delete {
+    right: 12px; }
+  .list-group-item .edit {
+    right: 40px; }
 
 .btn {
   background-color: #ca6704;
@@ -48,8 +67,3 @@ body {
 .checkbox_active {
   text-decoration: line-through;
   opacity: 0.4; }
-
-.contents {
-  padding-left: 15px;
-  font-family: "Times New Roman", Times, serif;
-  font-weight: 600; }

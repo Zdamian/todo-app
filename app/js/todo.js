@@ -20,38 +20,27 @@ $(function() {
 
     // Dodaj todos z localStorage
     _(todos).each(function(todo) {
-        var $check = $('<input type="checkbox" class="app-check">');
+        var $check = $('<span class="app-check glyphicon glyphicon-unchecked check"></span>');
         var $item = $('<li class="list-group-item"></li>');
         var $todo = $('<span class="app-todo contents"></span>');
-        var $edit = $('<span class="app-edit glyphicon glyphicon-pencil"></span>');
-        var $del = $('<span class="app-delete glyphicon glyphicon-trash"></span>');
+        var $edit = $('<span class="app-edit glyphicon glyphicon-pencil edit"></span>');
+        var $del = $('<span class="app-delete glyphicon glyphicon-trash delete"></span>');
+
+
+        if (todo.checked) {
+            $item.addClass('checkbox_active');
+            $check.removeClass('glyphicon-unchecked').addClass('glyphicon-check');
+
+        }
 
         $todo.text(todo.text);
-        $check.prop('checked', todo.checked);
-        $item.prepend($check);
+        $item.append($check);
         $item.append($todo);
         $item.append($del);
         $item.append($edit);
-        if (todo.checked) {
-            $item.addClass('checkbox_active');
-        }
 
         DOM.$list.append($item);
 
-        $del.hide();
-        $edit.hide();
-
-        DOM.$list.on('mouseenter', '.list-group-item', function(e) {
-
-            $(this).find('.app-edit').show();
-            $(this).find('.app-delete').show();
-        });
-
-        DOM.$list.on('mouseleave', '.list-group-item', function(e) {
-
-            $(this).find('.app-edit').hide();
-            $(this).find('.app-delete').hide();
-        });
     });
 
     // Funkcja dodawająca nowy element listy na wciśnięcie klawisza 'enter'
@@ -80,22 +69,19 @@ $(function() {
                     });
                     updateLocalStorage();
 
-                    var $check = $('<input type="checkbox" class="app-check">');
+                    var $check = $('<span class="app-check glyphicon glyphicon-unchecked check"></span>');
                     var $item = $('<li class="list-group-item"></li>');
                     var $todo = $('<span class="app-todo contents"></span>');
-                    var $edit = $('<span class="app-edit glyphicon glyphicon-pencil"></span>');
-                    var $del = $('<span class="app-delete glyphicon glyphicon-trash"></span>');
+                    var $edit = $('<span class="app-edit glyphicon glyphicon-pencil edit"></span>');
+                    var $del = $('<span class="app-delete glyphicon glyphicon-trash delete"></span>');
 
                     $todo.text(todo);
-                    $item.prepend($check);
+                    $item.append($check);
                     $item.append($todo);
                     $item.append($del);
                     $item.append($edit);
 
                     DOM.$list.append($item);
-
-                    $del.hide();
-                    $edit.hide();
                 }
             }
 
@@ -134,22 +120,19 @@ $(function() {
                 });
                 updateLocalStorage();
 
-                var $check = $('<input type="checkbox" class="app-check">');
+                var $check = $('<span class="app-check glyphicon glyphicon-unchecked check"></span>');
                 var $item = $('<li class="list-group-item"></li>');
                 var $todo = $('<span class="app-todo contents"></span>');
-                var $edit = $('<span class="app-edit glyphicon glyphicon-pencil"></span>');
-                var $del = $('<span class="app-delete glyphicon glyphicon-trash"></span>');
+                var $edit = $('<span class="app-edit glyphicon glyphicon-pencil edit"></span>');
+                var $del = $('<span class="app-delete glyphicon glyphicon-trash delete"></span>');
 
                 $todo.text(todo);
-                $item.prepend($check);
+                $item.append($check);
                 $item.append($todo);
                 $item.append($del);
                 $item.append($edit);
 
                 DOM.$list.append($item);
-
-                $del.hide();
-                $edit.hide();
 
             }
         }
@@ -166,7 +149,6 @@ $(function() {
     DOM.$list.on('click', '.app-delete', function(e) {
 
         var id = $(this).parent('li').prevAll().length;
-        console.log(id);
         todos.splice(id, 1);
         updateLocalStorage();
 
@@ -189,18 +171,23 @@ $(function() {
     });
 
     // Funkcja dodawająca klase gdy checkbox jest aktywne i usuwająca klase gdy checkbox jest nie aktywne
-    DOM.$list.on('click', '.app-check', function(e) {
+    DOM.$list.on('click', '.list-group-item', function(e) {
 
-        if ($(this).prop("checked")) {
-            $(this).parent('li').addClass('checkbox_active');
+        var id = $(this).prevAll().length;
 
+        if ($(this).find('.app-check').hasClass("glyphicon-unchecked")) {
+            $(this).addClass('checkbox_active');
+            $(this).find('.app-check').removeClass('glyphicon-unchecked').addClass('glyphicon-check');
+
+            todos[id].checked = true;
         } else {
-            $(this).parent('li').removeClass('checkbox_active');
+            $(this).removeClass('checkbox_active');
+            $(this).find('.app-check').removeClass('glyphicon-check');
+            $(this).find('.app-check').addClass('glyphicon-unchecked');
 
+            todos[id].checked = false;
         }
-        var id = $(this).parent('li').prevAll().length;
 
-        todos[id].checked = $(this).prop("checked");
         updateLocalStorage();
 
     });

@@ -7,7 +7,6 @@ body {
 
 .glyphicon {
 	margin-left: 10px;
-	float: right;
 	cursor: pointer;
 }
 
@@ -20,13 +19,49 @@ body {
 }
 
 .list-group-item {
+	position: relative;
 	background-color: $baseBackgroundColor2;
 	font-size: 18px;
 
 	&:hover {
 		background-color: $baseColor;
+
+		.edit, .delete {
+			display: inline-block;
+		}
+	}
+
+	.edit, .delete  {
+		display: none;
+	}
+
+	.check, .edit, .delete {
+		position: absolute;
+		top: 13px;
+		font-size: 20px;
+	}
+
+	.check {
+		left: 2px;
+	}
+
+	.contents {
+		left: 25px;
+		padding-left: 25px;
+    	font-family: $baseFontFamily;
+    	font-weight: 600;
+	}
+
+	.delete {
+		right: 12px;
+	}
+
+	.edit {
+		right: 40px;
 	}
 }
+
+
 
 .btn {
 	background-color: $baseBackgroundColor;
@@ -51,10 +86,4 @@ body {
 .checkbox_active {
 	text-decoration: line-through;
 	opacity: 0.4;
-}
-
-.contents {
-	padding-left: 15px;
-    font-family: $baseFontFamily;
-    font-weight: 600;
 }
