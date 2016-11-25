@@ -1,5 +1,8 @@
 $(function() {
 
+    var todos = localStorage.getItem('todos');
+    todos = todos ? JSON.parse(todos) : [];
+
     var DOM = {
         $input: $('.app-input'),
         $list: $('.app-list'),
@@ -9,6 +12,32 @@ $(function() {
     var ENTER = 13;
     var editMode = false;
     var itemId;
+
+    function updateLocalStorage() {
+        localStorage.removeItem('todos');
+        localStorage.setItem('todos', JSON.stringify(todos));
+    }
+
+    // Dodaj todos z localStorage
+    _(todos).each(function(todo) {
+        var $check = $('<input type="checkbox" class="app-check">');
+        var $item = $('<li class="list-group-item"></li>');
+        var $todo = $('<span class="app-todo contents"></span>');
+        var $edit = $('<span class="app-edit glyphicon glyphicon-pencil"></span>');
+        var $del = $('<span class="app-delete glyphicon glyphicon-trash"></span>');
+
+        $todo.text(todo.text);
+        $check.prop('checked', todo.checked);
+        $item.prepend($check);
+        $item.append($todo);
+        $item.append($del);
+        $item.append($edit);
+        if (todo.checked) {
+            $item.addClass('checkbox_active');
+        }
+
+        DOM.$list.append($item);
+    });
 
     // Funkcja dodawająca nowy element listy na wciśnięcie klawisza 'enter'
     DOM.$input.on('keyup', function(e) {
@@ -21,11 +50,20 @@ $(function() {
 
                 if (todo.trim()) {
                     DOM.$list.find('li:eq(' + itemId + ')').find('.app-todo').text(todo);
+
+                    todos[itemId].text = todo;
+                    updateLocalStorage();
                 }
 
             } else {
 
                 if (todo.trim()) {
+                    todos.push({
+                        dateAdded: +new Date(),
+                        text: todo,
+                        checked: false
+                    });
+                    updateLocalStorage();
 
                     var $check = $('<input type="checkbox" class="app-check">');
                     var $item = $('<li class="list-group-item"></li>');
@@ -63,11 +101,20 @@ $(function() {
                     .find('li:eq(' + itemId + ')')
                     .find('.app-todo')
                     .text(todo);
+
+                todos[itemId].text = todo;
+                updateLocalStorage();
             }
 
         } else {
 
             if (todo.trim()) {
+                todos.push({
+                    dateAdded: +new Date(),
+                    text: todo,
+                    checked: false
+                });
+                updateLocalStorage();
 
                 var $check = $('<input type="checkbox" class="app-check">');
                 var $item = $('<li class="list-group-item"></li>');
@@ -97,6 +144,11 @@ $(function() {
     // Funkcja usuwająca wybrany element listy
     DOM.$list.on('click', '.app-delete', function(e) {
 
+        var id = $(this).parent('li').prevAll().length;
+        console.log(id);
+        todos.splice(id, 1);
+        updateLocalStorage();
+
         $(this).parent('li').remove();
 
     });
@@ -119,12 +171,16 @@ $(function() {
     DOM.$list.on('click', '.app-check', function(e) {
 
         if ($(this).prop("checked")) {
-            $(this).parents('li').addClass('checkbox_active');
+            $(this).parent('li').addClass('checkbox_active');
 
         } else {
-            $(this).parents('li').removeClass('checkbox_active');
+            $(this).parent('li').removeClass('checkbox_active');
 
         }
+        var id = $(this).parent('li').prevAll().length;
+
+        todos[id].checked = $(this).prop("checked");
+        updateLocalStorage();
         
     });
 
