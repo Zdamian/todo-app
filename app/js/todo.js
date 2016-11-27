@@ -32,7 +32,6 @@ $(function() {
             $item.addClass('checkbox_active');
             $todo.addClass('content_decoration');
             $check.removeClass('glyphicon-unchecked').addClass('glyphicon-check').css('color', '#7dbb00');
-
         }
 
         $todo.text(todo.text);
@@ -77,9 +76,6 @@ $(function() {
                     var $edit = $('<span class="app-edit glyphicon glyphicon-pencil edit" data-toggle="tooltip" data-placement="top" title="Edit"></span>');
                     var $del = $('<span class="app-delete glyphicon glyphicon-trash delete" data-toggle="tooltip" data-placement="top" title="Delete"></span>');
 
-                    var a = todos[todos.length - 1].dateAdded.getDate();
-                    console.log(a);
-
                     $todo.text(todo);
                     $item.append($check);
                     $item.append($todo);
@@ -99,7 +95,6 @@ $(function() {
             $(function() {
                 $('[data-toggle="tooltip"]').tooltip()
             });
-
         }
 
     });
@@ -143,7 +138,6 @@ $(function() {
                 $item.append($edit);
 
                 DOM.$list.append($item);
-
             }
         }
 
@@ -159,6 +153,7 @@ $(function() {
 
     });
 
+    // Obsługa zdarzenia utraty 'focus' przy opuszczeniu pola edycji
     DOM.$list.on('blur', '.app-inputEdit', function(e) {
 
         var todo = $(this).val();
@@ -185,7 +180,6 @@ $(function() {
                     checked: false
                 });
                 updateLocalStorage();
-
             }
         }
 
@@ -228,7 +222,6 @@ $(function() {
                         checked: false
                     });
                     updateLocalStorage();
-
                 }
             }
 
