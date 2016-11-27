@@ -29,7 +29,8 @@ $(function() {
 
         if (todo.checked) {
             $item.addClass('checkbox_active');
-            $check.removeClass('glyphicon-unchecked').addClass('glyphicon-check');
+            $todo.addClass('content_decoration');
+            $check.removeClass('glyphicon-unchecked').addClass('glyphicon-check').css('color', '#7dbb00');
 
         }
 
@@ -170,19 +171,21 @@ $(function() {
 
     });
 
-    // Funkcja dodawająca klase gdy checkbox jest aktywne i usuwająca klase gdy checkbox jest nie aktywne
+    // Obsługa zdarzenia kliknięcia na którym ustawiamy element jako aktywny lub nie aktywny
     DOM.$list.on('click', '.list-group-item', function(e) {
 
         var id = $(this).prevAll().length;
 
+        $(this).find('.contents').toggleClass('content_decoration');
+
         if ($(this).find('.app-check').hasClass("glyphicon-unchecked")) {
             $(this).addClass('checkbox_active');
-            $(this).find('.app-check').removeClass('glyphicon-unchecked').addClass('glyphicon-check');
+            $(this).find('.app-check').removeClass('glyphicon-unchecked').addClass('glyphicon-check').css('color', '#7dbb00');
 
             todos[id].checked = true;
         } else {
             $(this).removeClass('checkbox_active');
-            $(this).find('.app-check').removeClass('glyphicon-check').addClass('glyphicon-unchecked');
+            $(this).find('.app-check').removeClass('glyphicon-check').addClass('glyphicon-unchecked').css('color', '#595959');
 
             todos[id].checked = false;
         }
