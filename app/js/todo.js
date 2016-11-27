@@ -156,33 +156,6 @@ $(function() {
     // Obsługa zdarzenia utraty 'focus' przy opuszczeniu pola edycji
     DOM.$list.on('blur', '.app-inputEdit', function(e) {
 
-        var todo = $(this).val();
-        itemId = $(this).parent('li').prevAll().length;
-
-        if (editMode) {
-
-            if (todo.trim()) {
-                DOM.$list
-                    .find('li:eq(' + itemId + ')')
-                    .find('.app-todo')
-                    .text(todo);
-
-                todos[itemId].text = todo;
-                updateLocalStorage();
-            }
-
-        } else {
-
-            if (todo.trim()) {
-                todos.push({
-                    dateAdded: +new Date(),
-                    text: todo,
-                    checked: false
-                });
-                updateLocalStorage();
-            }
-        }
-
         editMode = false;
 
         $(this).parent('li').find('.app-todo').show();
