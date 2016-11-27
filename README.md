@@ -1,7 +1,7 @@
-# Movie App 
+# Todo App 
 
 To start working with this app run once
-`git@github.com:damianzielin/movie-app.git`
+`git@github.com:Zdamian/todo-app.git`
 next run 
 `npm install`
 
