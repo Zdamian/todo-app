@@ -1,5 +1,5 @@
 node_modules
 
-static/css/**/*.css
+app/css/**/*.css
 
 npm-debug.log
