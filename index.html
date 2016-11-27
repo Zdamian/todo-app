@@ -9,20 +9,20 @@
     <body>
         <div class="container-fluid">
             <div class="row">
-                <div class="col-md-12 jumbotron">
-                    <h1>My first board - To do</h1>
+                <div class="col-xs-12 col-md-6 col-md-offset-3 bg-primary">
+                    <h1 class="text-center">My first board - Todo</h1>
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-2 col-md-offset-4 well">
-                    <input type="text" class="app-input form-control" placeholder="Add text to new list item" autofocus>
-                </div>
-                <div class="col-md-1 well">
-                    <button type="submit" class="app-add btn form-control">Add</button>
+                <div class="col-xs-12 col-md-6 col-md-offset-3 input-group form-group form-group-lg">
+                    <input type="text" id="formGroupInputLarge" class="app-input form-control input-lg" placeholder="Add a new task to list" autofocus>
+                    <span class="input-group-btn">
+                        <button type="submit" class="app-add btn btn-lg btn-primary">Add</button>
+                    </span>
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-4 col-md-offset-4 well panel-body">
+                <div class="col-xs-12 col-md-6 col-md-offset-3 input-group panel-body">
                     <ul class="app-list list-group"></ul>
                 </div>
             </div>

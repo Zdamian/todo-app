@@ -1,7 +1,6 @@
-$baseColor: #fb9a39;
-$baseColor2: #7dbb00;
-$baseFontFamily: "Times New Roman", Times, serif;
-$baseBackgroundColor: darken($baseColor, 20);
-$baseBackgroundColor2: lighten($baseColor, 20);
-$baseBackgroundColor3: lighten($baseColor, 35);
-$baseBackgroundColor4: darken($baseColor2, 10);
+$baseColor1: #7dbb00;
+$baseColor2: #F2F2F2;
+$baseColor3: darken($baseColor2, 50);
+$baseColor4: darken($baseColor2, 60);
+$baseFontFamily: "Helvetica Neue",Helvetica,Arial,sans-serif;
+$baseBackgroundColor1: darken($baseColor2, 7);
