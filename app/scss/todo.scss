@@ -2,28 +2,37 @@
 @import 'variables';
 
 body {
-	background-color: $baseBackgroundColor3;
+	background-color: $baseColor2;
+}
+
+.form-group-lg .form-control, .btn-lg {
+	height: 66px;
+	font-size: 26px;
 }
 
 .glyphicon {
 	cursor: pointer;
 }
 
-.jumbotron {
-	background-color: $baseBackgroundColor;
+.btn-primary {
+	width: 150px;
+}
+
+.btn-success {
+	width: 150px;
 }
 
 .list-group-item {
 	position: relative;
-	background-color: $baseBackgroundColor2;
 	font-size: 18px;
+	height: 66px;
+	line-height: 50px;
 
 	&:hover {
-		background-color: $baseColor;
+		background-color: $baseBackgroundColor1;
 
 		.edit, .delete {
 			display: inline-block;
-			color: black;
 		}
 	}
 
@@ -33,56 +42,67 @@ body {
 		&:hover {
 			background-color: white;
 			padding: 5px;
-			top: 8px;
+			top: 15px;
 			border-radius: 5px;
 		}
 	}
 
 	.check, .edit, .delete {
 		position: absolute;
-		top: 13px;
-		font-size: 20px;
+		top: 18px;
+		font-size: 30px;
+		color: $baseColor4;
 	}
 
 	.check {
-		left: 10px;
+		left: 18px;
 	}
 
 	.contents {
-		left: 25px;
-		padding-left: 25px;
+		position: absolute;
+		left: 66px;
     	font-family: $baseFontFamily;
-    	font-size: 20px;
-    	font-weight: 600;
+    	font-size: 30px;
 	}
 
 	.delete {
-		right: 10px;
+		right: 18px;
 
 		&:hover {
 			color: red;
+			right: 13px;
 		}
 	}
 
 	.edit {
-		right: 47px;
+		right: 70px;
 
 		&:hover {
-			color: $baseColor2;
+			color: $baseColor1;
+			right: 65px;
 		}
 	}
 }
 
-.checkbox_active {
+.content_decoration {
 	text-decoration: line-through;
-	opacity: 0.4;
 }
 
-.well {
-	border: 1px solid grey;
-	background-color: white;
+.checkbox_active {
+	opacity: 0.3;
 }
 
 .bg-primary {
 	margin-bottom: 15px;
+	color: $baseColor4;
+	background: none;
+}
+
+.list-group {
+	box-shadow: 0px 5px 12px 2px #ccc;
+}
+
+.inputEdit {
+	height: 100%;
+	font-size: 26px;
 }

@@ -12,58 +12,74 @@
 
 ------------------------------------------------------------- */
 body {
-  background-color: #dcf2ff; }
+  background-color: #F2F2F2; }
+
+.form-group-lg .form-control, .btn-lg {
+  height: 66px;
+  font-size: 26px; }
 
 .glyphicon {
   cursor: pointer; }
 
-.jumbotron {
-  background-color: #014a75; }
+.btn-primary {
+  width: 150px; }
+
+.btn-success {
+  width: 150px; }
 
 .list-group-item {
   position: relative;
-  background-color: #038ad9;
-  font-size: 18px; }
+  font-size: 18px;
+  height: 66px;
+  line-height: 50px; }
   .list-group-item:hover {
-    background-color: #026AA7; }
+    background-color: #e0e0e0; }
     .list-group-item:hover .edit, .list-group-item:hover .delete {
-      display: inline-block;
-      color: black; }
+      display: inline-block; }
   .list-group-item .edit, .list-group-item .delete {
     display: none; }
     .list-group-item .edit:hover, .list-group-item .delete:hover {
       background-color: white;
       padding: 5px;
-      top: 8px;
+      top: 15px;
       border-radius: 5px; }
   .list-group-item .check, .list-group-item .edit, .list-group-item .delete {
     position: absolute;
-    top: 13px;
-    font-size: 20px; }
+    top: 18px;
+    font-size: 30px;
+    color: #595959; }
   .list-group-item .check {
-    left: 10px; }
+    left: 18px; }
   .list-group-item .contents {
-    left: 25px;
-    padding-left: 25px;
-    font-family: "Times New Roman", Times, serif;
-    font-size: 20px;
-    font-weight: 600; }
+    position: absolute;
+    left: 66px;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 30px; }
   .list-group-item .delete {
-    right: 10px; }
+    right: 18px; }
     .list-group-item .delete:hover {
-      color: red; }
+      color: red;
+      right: 13px; }
   .list-group-item .edit {
-    right: 47px; }
+    right: 70px; }
     .list-group-item .edit:hover {
-      color: #7dbb00; }
+      color: #7dbb00;
+      right: 65px; }
+
+.content_decoration {
+  text-decoration: line-through; }
 
 .checkbox_active {
-  text-decoration: line-through;
-  opacity: 0.4; }
-
-.well {
-  border: 1px solid grey;
-  background-color: white; }
+  opacity: 0.3; }
 
 .bg-primary {
-  margin-bottom: 15px; }
+  margin-bottom: 15px;
+  color: #595959;
+  background: none; }
+
+.list-group {
+  box-shadow: 0px 5px 12px 2px #ccc; }
+
+.inputEdit {
+  height: 100%;
+  font-size: 26px; }
