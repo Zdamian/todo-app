@@ -7,6 +7,9 @@ var ListModel = function (items) {
 
     // Zdarzenie (Event) emitowany do Widoku, że został usunięty element
     this.itemRemoved = new Event(this);
+
+    // Zdarzenie (Event) emitowany do Widoku, że został kliknięty element
+    this.itemClicked = new Event(this);
 }
 
 ListModel.prototype = {
@@ -41,6 +44,14 @@ ListModel.prototype = {
 
         // Zerowanie ektywnego indeksu listy
         this.setSelectedIndex(-1);
+    },
+
+    doneItem: function () {
+
+        // Wysłanie powiadomienia do Widoku, że element został zaznaczony 
+        this.itemClicked.notify({
+            index: this._selectedIndex 
+        });
     },
 
     getSelectedIndex: function () {

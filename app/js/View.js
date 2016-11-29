@@ -17,6 +17,9 @@ var ListView = function (model, elements, selectors) {
     // Event powiadamiający kontroler, gdy został kliknięty element delButton
     this.delButtonClicked = new Event(this);
 
+    // Event powiadamiający kontroler, gdy został kliknięty element listy
+    this.listItemClicked = new Event(this);
+
     var _this = this;
 
     // attach model listeners
@@ -37,6 +40,15 @@ var ListView = function (model, elements, selectors) {
 
         // Odświeżenie widoku
         _this.render();
+    });
+
+    // Nasłuchiwanie na Zdarzenie (Event) emitowane przez model,
+    // że zostal zaznaczony element i dowiązanie (attach)
+    // funkcji na to zdarzenie
+    this._model.itemClicked.attach(function (sender, args) {
+
+        // Zmiana klasy
+        _this.toggleItem(args.index);
     });
 
     // attach listeners to HTML controls
@@ -84,6 +96,14 @@ var ListView = function (model, elements, selectors) {
         // ze delButton został klinknięty
         _this.delButtonClicked.notify();
     });
+
+    // Przechwycenie zdarzenia kliknięcie na element listy
+    this._elements.list.on('click', this._selectors.itemText, function () {
+
+        // Widok powiadamia (notify) kontroler, 
+        // ze element listy został klinknięty
+        _this.listItemClicked.notify();
+    });
 };
 
 ListView.prototype = {
@@ -101,6 +121,7 @@ ListView.prototype = {
 
         this._elements.input.val('').focus();
     },
+
     toggleItem: function (index) {
         list = this._elements.list;
         list.find(this._selectors.listItem + ':eq('+ index +')').toggleClass('done');

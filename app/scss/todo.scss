@@ -5,6 +5,10 @@ body {
 	background-color: $baseColor2;
 }
 
+.done {
+	text-decoration: line-through;
+}
+
 .form-group-lg .form-control, .btn-lg {
 	height: 66px;
 	font-size: 26px;
