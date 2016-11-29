@@ -5,8 +5,9 @@ $(function () {
             'addButton': $('.app-button'),
             'input': $('.app-input')
         }, {
-          'item': 'li',
-          'del': '.app-del'
+          'listItem': 'li',
+          'deleteButton': '.app-del',
+          'itemText': '.app-item'
         }),
         controller = new ListController(model, view);
 
