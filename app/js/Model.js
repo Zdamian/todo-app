@@ -1,4 +1,4 @@
-var ListModel = function (items) {
+var ListModel = function(items) {
     this._items = items;
     this._selectedIndex = -1;
 
@@ -13,16 +13,33 @@ var ListModel = function (items) {
 }
 
 ListModel.prototype = {
-    getItems: function () {
+    getItems: function() {
 
         // Zwraca tablicę elementów
         return [].concat(this._items);
     },
 
-    addItem: function (item) {
+    addItem: function(item) {
+
+        var today = new Date();
+        var day = today.getDate();
+        var month = today.getMonth() + 1;
+        var year = today.getFullYear();
+        var hour = today.getHours();
+        var minute = today.getMinutes();
+
+        if (hour < 10) hour = "0" + hour;
+
+        if (minute < 10) minute = "0" + minute;
+
+        var date = 'Task added: ' + day + "/" + month + "/" + year + " | " + hour + ":" + minute;
 
         // Dostawienie nowego elementu do tablicy items
-        this._items.push(item);
+        this._items.push({
+            text: item,
+            done: false,
+            dateAdded: date
+        });
 
         // Wysłanie powiadomienia do Widoku, że został dodany nowy element
         this.itemAdded.notify({
@@ -30,7 +47,7 @@ ListModel.prototype = {
         });
     },
 
-    removeItemAt: function (index) {
+    removeItemAt: function(index) {
         var item;
 
         // Usunięcie wybranego elementu z tablicy items
@@ -46,21 +63,23 @@ ListModel.prototype = {
         this.setSelectedIndex(-1);
     },
 
-    doneItem: function () {
+    doneItem: function() {
+
+        this._items[this._selectedIndex].done = !this._items[this._selectedIndex].done;
 
         // Wysłanie powiadomienia do Widoku, że element został zaznaczony 
         this.itemClicked.notify({
-            index: this._selectedIndex 
+            index: this._selectedIndex
         });
     },
 
-    getSelectedIndex: function () {
+    getSelectedIndex: function() {
 
         // Zwrócenie aktywnego indkesu elementu listy
         return this._selectedIndex;
     },
 
-    setSelectedIndex: function (index) {
+    setSelectedIndex: function(index) {
 
         // Ustawienie aktywnego indeksu elementu listy
         this._selectedIndex = index;

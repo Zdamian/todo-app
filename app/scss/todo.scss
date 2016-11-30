@@ -30,28 +30,40 @@ body {
 	position: relative;
 	font-size: 18px;
 	height: 66px;
-	line-height: 50px;
+	line-height: 45px;
 
 	&:hover {
 		background-color: $baseBackgroundColor1;
 
-		.edit, .delete {
+		.date-added, .delete {
 			display: inline-block;
 		}
 	}
 
-	.edit, .delete  {
+	.date-added {
 		display: none;
+		left: 18px;
+
+		&:hover {
+			color: $baseColor5;
+		}
+	}
+
+	.delete  {
+		display: none;
+		right: 18px;
 
 		&:hover {
 			background-color: white;
 			padding: 5px;
 			top: 15px;
 			border-radius: 5px;
+			color: red;
+			right: 13px;
 		}
 	}
 
-	.check, .edit, .delete {
+	.check, .date-added, .delete {
 		position: absolute;
 		top: 18px;
 		font-size: 30px;
@@ -62,38 +74,13 @@ body {
 		left: 18px;
 	}
 
-	.contents {
+	.item-text {
 		position: absolute;
 		left: 66px;
     	font-family: $baseFontFamily;
-    	font-size: 30px;
+    	font-size: 22px;
+    	cursor: pointer;
 	}
-
-	.delete {
-		right: 18px;
-
-		&:hover {
-			color: red;
-			right: 13px;
-		}
-	}
-
-	.edit {
-		right: 70px;
-
-		&:hover {
-			color: $baseColor1;
-			right: 65px;
-		}
-	}
-}
-
-.content_decoration {
-	text-decoration: line-through;
-}
-
-.checkbox_active {
-	opacity: 0.3;
 }
 
 .bg-primary {
