@@ -13,6 +13,7 @@ $(function() {
         }, {
             'listItem': 'li',
             'deleteButton': '.app-del',
+            'itemDateAdded': '.app-date',
             'itemText': '.app-item'
         }),
         controller = new ListController(model, view);

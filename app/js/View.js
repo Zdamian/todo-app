@@ -30,7 +30,7 @@ var ListView = function(model, elements, selectors) {
     this._model.itemAdded.attach(function() {
 
         // Odświeżenie widoku
-        _this.render();
+        _this.render('item added');
     });
 
     // Nasłuchiwanie na Zdarzenie (Event) emitowane przez model,
@@ -115,11 +115,11 @@ ListView.prototype = {
 
         items = this._model.getItems();
         for (key in items) {
-            // list.append($('<li class="list-group-item"><span class="app-item">' + items[key] + '</span><span class="app-del glyphicon glyphicon-trash delete"></span></li>'));
 
             var $item = $('<li class="list-group-item"></li>');
-            var $todo = $('<span class="app-item"></span>');
-            var $del = $('<span class="app-del glyphicon glyphicon-trash delete"></span>');
+            var $todo = $('<span class="app-item item-text"></span>');
+            var $date = $('<span class="app-date date-added glyphicon glyphicon-time" data-toggle="tooltip" data-placement="top" title="' + items[key].dateAdded + '"></span>');
+            var $del = $('<span class="app-del glyphicon glyphicon-trash delete" data-toggle="tooltip" data-placement="top" title="Delete"></span>');
 
             $todo.text(items[key].text);
 
@@ -128,8 +128,13 @@ ListView.prototype = {
             }
 
             $item.append($todo);
+            $item.append($date);
             $item.append($del);
             list.append($item);
+
+            $(function() {
+                $('[data-toggle="tooltip"]').tooltip()
+            });
 
         }
         this._model.setSelectedIndex(-1);
