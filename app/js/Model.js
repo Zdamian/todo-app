@@ -22,7 +22,10 @@ ListModel.prototype = {
     addItem: function (item) {
 
         // Dostawienie nowego elementu do tablicy items
-        this._items.push(item);
+        this._items.push({
+            text: item,
+            done: false
+        });
 
         // Wysłanie powiadomienia do Widoku, że został dodany nowy element
         this.itemAdded.notify({
@@ -47,6 +50,8 @@ ListModel.prototype = {
     },
 
     doneItem: function () {
+
+        this._items[this._selectedIndex].done = true;
 
         // Wysłanie powiadomienia do Widoku, że element został zaznaczony 
         this.itemClicked.notify({
