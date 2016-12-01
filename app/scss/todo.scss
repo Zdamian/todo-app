@@ -9,6 +9,16 @@ body {
 	text-decoration: line-through;
 }
 
+.message {
+	display: none;
+	margin: 0 auto;
+	width: 200px;
+	height: 100px;
+	border-radius: 20px;
+	font-size: 22px;
+	background-color: $baseColor1;
+}
+
 .form-group-lg .form-control, .btn-lg {
 	height: 66px;
 	font-size: 26px;

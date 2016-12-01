@@ -30,7 +30,7 @@ var ListView = function(model, elements, selectors) {
     this._model.itemAdded.attach(function() {
 
         // Odświeżenie widoku
-        _this.render('item added');
+        _this.render('Item added!');
     });
 
     // Nasłuchiwanie na Zdarzenie (Event) emitowane przez model,
@@ -39,7 +39,7 @@ var ListView = function(model, elements, selectors) {
     this._model.itemRemoved.attach(function() {
 
         // Odświeżenie widoku
-        _this.render();
+        _this.render('Item removed!');
     });
 
     // Nasłuchiwanie na Zdarzenie (Event) emitowane przez model,
@@ -107,10 +107,11 @@ var ListView = function(model, elements, selectors) {
 };
 
 ListView.prototype = {
-    render: function() {
-        var list, items, key;
+    render: function(notice) {
+        var list, items, key, alert;
 
         list = this._elements.list;
+        alert = this._elements.message;
         list.html('');
 
         items = this._model.getItems();
@@ -131,6 +132,7 @@ ListView.prototype = {
             $item.append($date);
             $item.append($del);
             list.append($item);
+            alert.text(notice).fadeIn(1000);
 
             $(function() {
                 $('[data-toggle="tooltip"]').tooltip()
@@ -140,5 +142,9 @@ ListView.prototype = {
         this._model.setSelectedIndex(-1);
 
         this._elements.input.val('').focus();
+
+        setTimeout(function() {
+            alert.fadeOut()
+        }, 2000);
     }
 };

@@ -9,7 +9,8 @@ $(function() {
         view = new ListView(model, {
             'list': $('.app-list'),
             'addButton': $('.app-button'),
-            'input': $('.app-input')
+            'input': $('.app-input'),
+            'message': $('.app-message')
         }, {
             'listItem': 'li',
             'deleteButton': '.app-del',
