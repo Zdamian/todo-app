@@ -1,8 +1,12 @@
 $baseColor1: #7dbb00;
 $baseColor2: #F2F2F2;
-$baseColor3: darken($baseColor2, 10);
-$baseColor4: darken($baseColor2, 60);
-$baseColor5: #337ab7;
-$baseColor6: darken($baseColor2, 35);
-$baseFontFamily: "Helvetica Neue",Helvetica,Arial,sans-serif;
-$baseBackgroundColor1: darken($baseColor2, 7);
+$baseColor3: #337ab7;
+$backgroundItemList: darken($baseColor2, 5);
+$backgroundBody: $baseColor2;
+$hoverGlyphicon: darken($baseColor2, 35);
+$backgroundCompleted: darken($baseColor2, 1);
+$colorTextCompleted: darken($baseColor2, 35);
+$colorBorderAlert: $baseColor1;
+$hoverDateAdded: $baseColor3;
+$colorGlyphicon: darken($baseColor2, 60);
+$colorHeader: darken($baseColor2, 60);

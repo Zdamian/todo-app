@@ -48,15 +48,15 @@ ListModel.prototype = {
     },
 
     removeItemAt: function(index) {
-        // var item;
+        var item;
 
         // Usunięcie wybranego elementu z tablicy items
-        // item = this._items[index];
-        // this._items.splice(index, 1);
+         item = this._items[index];
+         this._items.splice(index, 1);
 
-        // Wysłanie powiadomienia do Widoku, że zosatł usunięty element
+        // Wysłanie indeksu elementu listy do Widoku
         this.itemRemoved.notify({
-            index: index // Opcjonalne
+            index: index 
         });
 
         // Zerowanie ektywnego indeksu listy
