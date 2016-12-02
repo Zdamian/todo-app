@@ -45,10 +45,11 @@ var ListView = function(model, elements, selectors) {
     // Nasłuchiwanie na Zdarzenie (Event) emitowane przez model,
     // że zostal zaznaczony element i dowiązanie (attach)
     // funkcji na to zdarzenie
-    this._model.itemClicked.attach(function() {
+    this._model.itemClicked.attach(function(sender, args) {
 
+        var message = args.done ? 'Task completed!' : 'Task uncompleted!';
         // Odświeżenie widoku
-        _this.render();
+        _this.render(message);
     });
 
     // attach listeners to HTML controls
@@ -126,13 +127,14 @@ ListView.prototype = {
 
             if (items[key].done) {
                 $todo.addClass('done');
+                $item.addClass('completed');
             }
 
             $item.append($todo);
             $item.append($date);
             $item.append($del);
             list.append($item);
-            alert.text(notice).fadeIn(1000);
+            alert.text(notice).addClass('active');
 
             $(function() {
                 $('[data-toggle="tooltip"]').tooltip()
@@ -144,7 +146,7 @@ ListView.prototype = {
         this._elements.input.val('').focus();
 
         setTimeout(function() {
-            alert.fadeOut()
-        }, 2000);
+            alert.removeClass('active');
+        }, 1500);
     }
 };

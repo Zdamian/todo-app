@@ -1,10 +1,12 @@
 $(function() {
     var model = new ListModel([{
             text: 'PHP',
-            done: false
+            done: false,
+            dateAdded: new Date()
         }, {
             text: 'JavaScript',
-            done: true
+            done: true,
+            dateAdded: new Date()
         }]),
         view = new ListView(model, {
             'list': $('.app-list'),
@@ -19,5 +21,5 @@ $(function() {
         }),
         controller = new ListController(model, view);
 
-    view.render();
+    view.render('Tasks loaded');
 });
