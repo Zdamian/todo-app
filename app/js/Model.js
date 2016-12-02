@@ -69,7 +69,7 @@ ListModel.prototype = {
 
         // Wysłanie powiadomienia do Widoku, że element został zaznaczony 
         this.itemClicked.notify({
-            index: this._selectedIndex
+            done: this._items[this._selectedIndex].done
         });
     },
 

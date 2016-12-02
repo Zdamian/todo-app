@@ -9,6 +9,36 @@ body {
 	text-decoration: line-through;
 }
 
+.completed {
+	color: $baseColor6;
+	background-color: $baseColor3;
+
+	&:hover {
+
+		.date-added, .delete {
+			color: $baseColor6
+		}
+	}
+}
+
+.alert {
+	opacity: 0;
+	position: fixed;
+	top: 20px;
+	right: 20px;
+	transition: opacity 0.2s;
+
+	&.active {
+		opacity: 1;
+	}
+}
+
+
+.alert-success {
+	border: 1px solid $baseColor1;
+	background:none;
+}
+
 .form-group-lg .form-control, .btn-lg {
 	height: 66px;
 	font-size: 26px;
