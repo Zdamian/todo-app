@@ -155,12 +155,17 @@ ListView.prototype = {
         list = this._elements.list;
         alert = this._elements.message;
 
-        list.find(this._selectors.listItem + ':eq('+ index +')').remove();
+        var itemDel = list.find(this._selectors.listItem + ':eq('+ index +')');
+
+        itemDel.addClass('removing');
         alert.text(notice).addClass('active');
 
         setTimeout(function() {
             alert.removeClass('active');
         }, 1500);
 
+        setTimeout(function() {
+            itemDel.remove();
+        }, 300);
     }
 };
