@@ -2,11 +2,41 @@
 @import 'variables';
 
 body {
-	background-color: $baseColor2;
+	background-color: $backgroundBody;
 }
 
 .done {
 	text-decoration: line-through;
+}
+
+.completed {
+	color: $colorTextCompleted;
+	background-color: $backgroundCompleted;
+
+	&:hover {
+
+		.date-added, .delete {
+			color: $hoverGlyphicon;
+		}
+	}
+}
+
+.alert {
+	opacity: 0;
+	position: fixed;
+	top: 20px;
+	right: 20px;
+	transition: opacity 0.2s;
+
+	&.active {
+		opacity: 1;
+	}
+}
+
+
+.alert-success {
+	border: 1px solid $colorBorderAlert;
+	background:none;
 }
 
 .form-group-lg .form-control, .btn-lg {
@@ -30,75 +60,65 @@ body {
 	position: relative;
 	font-size: 18px;
 	height: 66px;
-	line-height: 50px;
+	line-height: 45px;
+	opacity: 1;
+	transform: translateX(0px);
+	transition: transform 0.3s, opacity 0.3s;
+
+	&.removing {
+		transform: translateX(1400px);
+		opacity: 0.5;
+	}
 
 	&:hover {
-		background-color: $baseBackgroundColor1;
+		background-color: $backgroundItemList;
 
-		.edit, .delete {
+		.date-added, .delete {
 			display: inline-block;
 		}
 	}
 
-	.edit, .delete  {
+	.date-added {
 		display: none;
+		left: 18px;
+
+		&:hover {
+			color: $hoverDateAdded;
+		}
+	}
+
+	.delete  {
+		display: none;
+		right: 18px;
 
 		&:hover {
 			background-color: white;
 			padding: 5px;
 			top: 15px;
 			border-radius: 5px;
-		}
-	}
-
-	.check, .edit, .delete {
-		position: absolute;
-		top: 18px;
-		font-size: 30px;
-		color: $baseColor4;
-	}
-
-	.check {
-		left: 18px;
-	}
-
-	.contents {
-		position: absolute;
-		left: 66px;
-    	font-family: $baseFontFamily;
-    	font-size: 30px;
-	}
-
-	.delete {
-		right: 18px;
-
-		&:hover {
 			color: red;
 			right: 13px;
 		}
 	}
 
-	.edit {
-		right: 70px;
-
-		&:hover {
-			color: $baseColor1;
-			right: 65px;
-		}
+	.date-added, .delete {
+		position: absolute;
+		top: 18px;
+		font-size: 30px;
+		color: $colorGlyphicon;
 	}
-}
 
-.content_decoration {
-	text-decoration: line-through;
-}
-
-.checkbox_active {
-	opacity: 0.3;
+	.item-text {
+		position: absolute;
+		left: 66px;
+    	font-size: 22px;
+    	cursor: pointer;
+	}
 }
 
 .bg-primary {
 	margin-bottom: 15px;
-	color: $baseColor4;
+	color: $colorHeader;
 	background: none;
 }
 

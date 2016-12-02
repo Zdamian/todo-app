@@ -1,4 +1,4 @@
-var ListView = function (model, elements, selectors) {
+var ListView = function(model, elements, selectors) {
     this._model = model;
     this._elements = elements;
     this._selectors = selectors;
@@ -27,34 +27,35 @@ var ListView = function (model, elements, selectors) {
     // Nasłuchiwanie na Zdarzenie (Event) emitowane przez model,
     // że zostal dodany nowy element i dowiązanie (attach)
     // funkcji na to zdarzenie
-    this._model.itemAdded.attach(function () {
+    this._model.itemAdded.attach(function() {
 
         // Odświeżenie widoku
-        _this.render();
+        _this.render('Item added!');
     });
 
     // Nasłuchiwanie na Zdarzenie (Event) emitowane przez model,
     // że zostal usunięty element i dowiązanie (attach)
     // funkcji na to zdarzenie
-    this._model.itemRemoved.attach(function () {
+    this._model.itemRemoved.attach(function(sender, args) {
 
         // Odświeżenie widoku
-        _this.render();
+        _this.removedItem('Item removed!', args.index);
     });
 
     // Nasłuchiwanie na Zdarzenie (Event) emitowane przez model,
     // że zostal zaznaczony element i dowiązanie (attach)
     // funkcji na to zdarzenie
-    this._model.itemClicked.attach(function (sender, args) {
+    this._model.itemClicked.attach(function(sender, args) {
 
-        // Zmiana klasy
-        _this.toggleItem(args.index);
+        var message = args.done ? 'Task completed!' : 'Task uncompleted!';
+        // Odświeżenie widoku
+        _this.render(message);
     });
 
     // attach listeners to HTML controls
 
     // Przechwycenie zdarzenia najchenia kursora na element listy (hover)
-    this._elements.list.on('mouseover', this._selectors.listItem, function () {
+    this._elements.list.on('mouseover', this._selectors.listItem, function() {
         var _self = this;
 
         // Widok powiadamia (notify) kontroler,
@@ -66,7 +67,7 @@ var ListView = function (model, elements, selectors) {
     });
 
     // Przechwycenie zdarzenia kliknięcie na element addButton
-    this._elements.addButton.on('click', function () {
+    this._elements.addButton.on('click', function() {
 
         // Widok powiadamia (notify) kontroler,
         // że addButton został kliknięty i w powiadomieniu wysyła
@@ -77,7 +78,7 @@ var ListView = function (model, elements, selectors) {
     });
 
     // Przechwycenie zdarzenia wciśnięcia klawisza enter na elemencie input
-    this._elements.input.on('keyup', function (e) {
+    this._elements.input.on('keyup', function(e) {
         if (e.keyCode === 13) {
 
             // Widok powiadamia (notify) kontroler,
@@ -90,7 +91,7 @@ var ListView = function (model, elements, selectors) {
     });
 
     // Przechwycenie zdarzenia kliknięcie na element delButton
-    this._elements.list.on('click', this._selectors.deleteButton, function () {
+    this._elements.list.on('click', this._selectors.deleteButton, function() {
 
         // Widok powiadamia (notify) kontroler, 
         // ze delButton został klinknięty
@@ -98,7 +99,7 @@ var ListView = function (model, elements, selectors) {
     });
 
     // Przechwycenie zdarzenia kliknięcie na element listy
-    this._elements.list.on('click', this._selectors.itemText, function () {
+    this._elements.list.on('click', this._selectors.itemText, function() {
 
         // Widok powiadamia (notify) kontroler, 
         // ze element listy został klinknięty
@@ -107,23 +108,64 @@ var ListView = function (model, elements, selectors) {
 };
 
 ListView.prototype = {
-    render: function () {
-        var list, items, key;
+    render: function(notice) {
+        var list, items, key, alert;
 
         list = this._elements.list;
+        alert = this._elements.message;
         list.html('');
 
         items = this._model.getItems();
         for (key in items) {
-            list.append($('<li><span class="app-item">' + items[key] + '</span><i class="app-del"> X </i></li>'));
+
+            var $item = $('<li class="list-group-item"></li>');
+            var $todo = $('<span class="app-item item-text"></span>');
+            var $date = $('<span class="app-date date-added glyphicon glyphicon-time" data-toggle="tooltip" data-placement="top" title="' + items[key].dateAdded + '"></span>');
+            var $del = $('<span class="app-del glyphicon glyphicon-trash delete" data-toggle="tooltip" data-placement="top" title="Delete"></span>');
+
+            $todo.text(items[key].text);
+
+            if (items[key].done) {
+                $todo.addClass('done');
+                $item.addClass('completed');
+            }
+
+            $item.append($todo);
+            $item.append($date);
+            $item.append($del);
+            list.append($item);
+            alert.text(notice).addClass('active');
+
+            $(function() {
+                $('[data-toggle="tooltip"]').tooltip()
+            });
+
         }
         this._model.setSelectedIndex(-1);
 
         this._elements.input.val('').focus();
-    },
 
-    toggleItem: function (index) {
+        setTimeout(function() {
+            alert.removeClass('active');
+        }, 1500);
+    },
+    removedItem: function(notice, index) {
+        var alert;
+
         list = this._elements.list;
-        list.find(this._selectors.listItem + ':eq('+ index +')').toggleClass('done');
+        alert = this._elements.message;
+
+        var itemDel = list.find(this._selectors.listItem + ':eq('+ index +')');
+
+        itemDel.addClass('removing');
+        alert.text(notice).addClass('active');
+
+        setTimeout(function() {
+            alert.removeClass('active');
+        }, 1500);
+
+        setTimeout(function() {
+            itemDel.remove();
+        }, 300);
     }
 };
