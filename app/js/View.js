@@ -36,10 +36,10 @@ var ListView = function(model, elements, selectors) {
     // Nasłuchiwanie na Zdarzenie (Event) emitowane przez model,
     // że zostal usunięty element i dowiązanie (attach)
     // funkcji na to zdarzenie
-    this._model.itemRemoved.attach(function() {
+    this._model.itemRemoved.attach(function(sender, args) {
 
         // Odświeżenie widoku
-        _this.render('Item removed!');
+        _this.removedItem('Item removed!', args.index);
     });
 
     // Nasłuchiwanie na Zdarzenie (Event) emitowane przez model,
@@ -148,5 +148,19 @@ ListView.prototype = {
         setTimeout(function() {
             alert.removeClass('active');
         }, 1500);
+    },
+    removedItem: function(notice, index) {
+        var alert;
+
+        list = this._elements.list;
+        alert = this._elements.message;
+
+        list.find(this._selectors.listItem + ':eq('+ index +')').remove();
+        alert.text(notice).addClass('active');
+
+        setTimeout(function() {
+            alert.removeClass('active');
+        }, 1500);
+
     }
 };
