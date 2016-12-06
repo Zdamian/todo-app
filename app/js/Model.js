@@ -10,6 +10,9 @@ var ListModel = function(items) {
 
     // Zdarzenie (Event) emitowany do Widoku, że został kliknięty element
     this.itemClicked = new Event(this);
+
+    // Zdarzenie (Event) emitowany do Widoku, że został kliknięty element
+    this.inputShow = new Event(this);
 }
 
 ListModel.prototype = {
@@ -47,16 +50,41 @@ ListModel.prototype = {
         });
     },
 
+    showInput: function(index) {
+
+        // Wysłanie indeksu elementu listy do Widoku
+        this.inputShow.notify({
+            index: index 
+        });
+
+        // Zerowanie ektywnego indeksu listy
+        this.setSelectedIndex(-1);
+    },
+
+    EditItem: function(item, index) {
+
+        var editText = item;
+
+        // Przypisanie nowego koloru 
+        this._items[index].text = editText;
+
+        // Wysłanie powiadomienia do Widoku, że został dodany
+        // zedytowany element listy
+        this.itemAdded.notify({
+            item: item // Opcjonalne
+        });
+    },
+
     removeItemAt: function(index) {
         var item;
 
         // Usunięcie wybranego elementu z tablicy items
-         item = this._items[index];
-         this._items.splice(index, 1);
+        item = this._items[index];
+        this._items.splice(index, 1);
 
         // Wysłanie indeksu elementu listy do Widoku
         this.itemRemoved.notify({
-            index: index 
+            index: index
         });
 
         // Zerowanie ektywnego indeksu listy

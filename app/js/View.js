@@ -20,6 +20,14 @@ var ListView = function(model, elements, selectors) {
     // Event powiadamiający kontroler, gdy został kliknięty element listy
     this.listItemClicked = new Event(this);
 
+    // Event powiadamiający kontroler, 
+    // gdy został podwójnie kliknięty element listy
+    this.listItemDblclicked = new Event(this);
+
+    // Event powiadamiający kontroler,
+    // gdy został wciśnięty klawisz enter na elemencie input
+    this.inputEditEnterClicked = new Event(this);
+
     var _this = this;
 
     // attach model listeners
@@ -40,6 +48,15 @@ var ListView = function(model, elements, selectors) {
 
         // Odświeżenie widoku
         _this.removedItem('Item removed!', args.index);
+    });
+
+    // Nasłuchiwanie na Zdarzenie (Event) emitowane przez model,
+    // że zostal edytowany element i dowiązanie (attach)
+    // funkcji na to zdarzenie
+    this._model.inputShow.attach(function(sender, args) {
+
+        // Odświeżenie widoku
+        _this.inputShow(args.index);
     });
 
     // Nasłuchiwanie na Zdarzenie (Event) emitowane przez model,
@@ -99,11 +116,33 @@ var ListView = function(model, elements, selectors) {
     });
 
     // Przechwycenie zdarzenia kliknięcie na element listy
-    this._elements.list.on('click', this._selectors.itemText, function() {
-
+    this._elements.list.on('click', this._selectors.itemText, function(e) {
+        e.stopPropagation();
         // Widok powiadamia (notify) kontroler, 
         // ze element listy został klinknięty
         _this.listItemClicked.notify();
+    });
+
+    // Przechwycenie zdarzenia podwójnego kliknięcie na element listy
+    this._elements.list.on('dblclick', this._selectors.itemText, function(e) {
+        e.stopPropagation();
+
+        // Widok powiadamia (notify) kontroler, 
+        // ze element listy został podwójnie klinknięty
+        _this.listItemDblclicked.notify();
+    });
+
+    // Przechwycenie zdarzenia wciśnięcia klawisza enter na elemncie input
+    this._elements.list.on('keyup', this._selectors.editInput, function(e) {
+        if (e.keyCode === 13) {
+
+            // Widok powiadamia (notify) kontroler,
+            // że klawisz enter zastał wciśnięty i w powiadomieniu wysyła
+            // wartość elementu input
+            _this.inputEditEnterClicked.notify({
+                item: _this._elements.list.find(_this._selectors.editInput).val().trim()
+            });
+        }
     });
 };
 
@@ -149,13 +188,14 @@ ListView.prototype = {
             alert.removeClass('active');
         }, 1500);
     },
+
     removedItem: function(notice, index) {
         var alert;
 
         list = this._elements.list;
         alert = this._elements.message;
 
-        var itemDel = list.find(this._selectors.listItem + ':eq('+ index +')');
+        var itemDel = list.find(this._selectors.listItem + ':eq(' + index + ')');
 
         itemDel.addClass('removing');
         alert.text(notice).addClass('active');
@@ -167,5 +207,21 @@ ListView.prototype = {
         setTimeout(function() {
             itemDel.remove();
         }, 300);
-    }
+    },
+
+    inputShow: function(index) {
+
+        list = this._elements.list;
+
+        var $editInput = $('<input type="text"class="app-edit-input"/>');
+        var $itemDate = list.find(this._selectors.itemDateAdded + ':eq(' + index + ')');
+        var $itemEdit = list.find(this._selectors.itemText + ':eq(' + index + ')');
+        var itemEditText = $itemEdit.text();
+
+        $itemDate.hide();
+        $editInput.val(itemEditText);
+        $itemEdit.replaceWith($editInput);
+
+        this._elements.list.find(this._selectors.editInput).focus();
+    },
 };

@@ -42,6 +42,24 @@ var ListController = function(model, view) {
     });
 
     // Nasłuchiwanie (przechwycenie) zdarzenia (Event) 
+    // podwójnego kliknięcia elementu listy
+    this._view.listItemDblclicked.attach(function() {
+
+        // Wywołanie metody Kontrolera
+        // na przechwycone zdarzenie (listItemDblclick)
+        _this.showInput();
+    });
+
+    // Nasłuchiwanie (przechwycenie) zdarzenia (Event) 
+    // wciśnięcia klawisza enter na elemencie input
+    this._view.inputEditEnterClicked.attach(function(sender, args) {
+
+        // Wywołanie metody Kontrolera na przechwycone zdarzenie z argumentem
+        // wemitowanym przez to zdarzenie (inputEditEnterClicked)
+        _this.EditItem(args.item);
+    });
+
+    // Nasłuchiwanie (przechwycenie) zdarzenia (Event) 
     // kliknięcia elementu listy
     this._view.listItemClicked.attach(function() {
 
@@ -72,6 +90,35 @@ ListController.prototype = {
             // Wywołanie metody Modelu removeItemAt i przekazanie
             // jako argument indeks elementu
             this._model.removeItemAt(this._model.getSelectedIndex());
+        }
+    },
+
+    showInput: function() {
+        var index;
+
+        // Przypisanie do zmiennej aktywnego elementu listy
+        index = this._model.getSelectedIndex();
+        if (index !== -1) {
+
+            // Wywołanie metody Modelu showInput i przekazanie
+            // jako argument indeks elementu
+            this._model.showInput(index);
+        }
+    },
+
+    EditItem: function(item) {
+        var index;
+
+        // Przypisanie do zmiennej aktywnego elementu listy
+        index = this._model.getSelectedIndex();
+        if (index !== -1) {
+
+            if (item) {
+
+                // Wywołanie metody Modelu EditItem i przekazanie jako argument
+                // przechwyconej przez Widok wartości inputa i indeks elementu listy
+                this._model.EditItem(item, index);
+            }
         }
     },
 

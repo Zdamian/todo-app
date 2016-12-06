@@ -14,10 +14,11 @@ $(function() {
             'input': $('.app-input'),
             'message': $('.app-message')
         }, {
-            'listItem': 'li',
+            'listItem': '.list-group-item',
             'deleteButton': '.app-del',
             'itemDateAdded': '.app-date',
-            'itemText': '.app-item'
+            'itemText': '.app-item',
+            'editInput': '.app-edit-input'
         }),
         controller = new ListController(model, view);
 
