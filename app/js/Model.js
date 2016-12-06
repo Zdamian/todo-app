@@ -5,6 +5,9 @@ var ListModel = function(items) {
     // Zdarzenie (Event) emitowany do Widoku, że został dodany nowy element
     this.itemAdded = new Event(this);
 
+    // Zdarzenie (Event) emitowany do Widoku, że został dodany nowy element
+    this.itemEdited = new Event(this);
+
     // Zdarzenie (Event) emitowany do Widoku, że został usunięty element
     this.itemRemoved = new Event(this);
 
@@ -70,7 +73,7 @@ ListModel.prototype = {
 
         // Wysłanie powiadomienia do Widoku, że został dodany
         // zedytowany element listy
-        this.itemAdded.notify({
+        this.itemEdited.notify({
             item: item // Opcjonalne
         });
     },

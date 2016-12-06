@@ -28,7 +28,10 @@ var ListView = function(model, elements, selectors) {
     // gdy został wciśnięty klawisz enter na elemencie input
     this.inputEditEnterClicked = new Event(this);
 
-    var _this = this;
+    var _this = this,
+        DELAY = 300,
+        clicks = 0,
+        timer = null;
 
     // attach model listeners
 
@@ -39,6 +42,15 @@ var ListView = function(model, elements, selectors) {
 
         // Odświeżenie widoku
         _this.render('Item added!');
+    });
+
+    // Nasłuchiwanie na Zdarzenie (Event) emitowane przez model,
+    // że zostal zedytowany element i dowiązanie (attach)
+    // funkcji na to zdarzenie
+    this._model.itemEdited.attach(function() {
+
+        // Odświeżenie widoku
+        _this.render('Item edited!');
     });
 
     // Nasłuchiwanie na Zdarzenie (Event) emitowane przez model,
@@ -116,16 +128,25 @@ var ListView = function(model, elements, selectors) {
     });
 
     // Przechwycenie zdarzenia kliknięcie na element listy
-    this._elements.list.on('click', this._selectors.itemText, function(e) {
-        e.stopPropagation();
-        // Widok powiadamia (notify) kontroler, 
-        // ze element listy został klinknięty
-        _this.listItemClicked.notify();
-    });
+        this._elements.list.on('click', this._selectors.itemText, function(e) {
 
-    // Przechwycenie zdarzenia podwójnego kliknięcie na element listy
-    this._elements.list.on('dblclick', this._selectors.itemText, function(e) {
-        e.stopPropagation();
+        clicks++;
+
+        if (clicks === 1) {
+
+            timer = setTimeout(function() {
+                _this.listItemClicked.notify();
+                clicks = 0;
+            }, DELAY);
+        } else {
+
+            clearTimeout(timer);
+            clicks = 0;
+        }
+
+        // Przechwycenie zdarzenia podwójnego kliknięcie na element listy
+    }).on('dblclick', this._selectors.itemText, function(e) {
+        e.preventDefault();
 
         // Widok powiadamia (notify) kontroler, 
         // ze element listy został podwójnie klinknięty
