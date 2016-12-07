@@ -5,7 +5,7 @@ var ListModel = function(items) {
     // The event (Event) emitting to the view, that was added the new element
     this.itemAdded = new Event(this);
 
-    // The event (Event) emitting to the view, that was added the new element
+    // The event (Event) emitting to the view, that was edited the new element
     this.itemEdited = new Event(this);
 
     // The event (Event) emitting to the view, that was deleted the element
@@ -68,7 +68,7 @@ ListModel.prototype = {
 
         var editText = item;
 
-        // Assigning a new text 
+        // Ascription a new text 
         this._items[index].text = editText;
 
         // Sending notifications to the View, that was added

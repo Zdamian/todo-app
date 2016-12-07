@@ -40,7 +40,7 @@ var ListView = function(model, elements, selectors) {
     // attach model listeners
 
     // Listening to the event (Event) emitting by Model,
-    // that was added the new element and connecting (attach)
+    // that was added the new element and joined (attach)
     // function on this event
     this._model.itemAdded.attach(function() {
 
@@ -49,7 +49,7 @@ var ListView = function(model, elements, selectors) {
     });
 
     // Listening to the event (Event) emitting by Model,
-    // that was edited the element and connecting (attach)
+    // that was edited the element and joined (attach)
     // function on this event
     this._model.itemEdited.attach(function() {
 
@@ -58,7 +58,7 @@ var ListView = function(model, elements, selectors) {
     });
 
     // Listening to the event (Event) emitting by Model,
-    // that was deleted the element and connecting (attach)
+    // that was deleted the element and joined (attach)
     // function on this event
     this._model.itemRemoved.attach(function(sender, args) {
 
@@ -67,7 +67,7 @@ var ListView = function(model, elements, selectors) {
     });
 
     // Listening to the event (Event) emitting by Model,
-    // that was edited the element and connecting (attach)
+    // that was edited the element and joined (attach)
     // function on this event
     this._model.inputShow.attach(function(sender, args) {
 
@@ -76,7 +76,7 @@ var ListView = function(model, elements, selectors) {
     });
 
     // Listening to the event (Event) emitting by Model,
-    // that was selected the element and connecting (attach)
+    // that was selected the element and joined (attach)
     // function on this event
     this._model.itemClicked.attach(function(sender, args) {
 
@@ -100,7 +100,7 @@ var ListView = function(model, elements, selectors) {
         });
     });
 
-    // Capture the event cliked on the element addButton
+    // Capture the event clicked on the element addButton
     this._elements.addButton.on('click', function() {
 
         // The View notifying (notify) Controller,
@@ -124,7 +124,7 @@ var ListView = function(model, elements, selectors) {
         }
     });
 
-    // Capture the event cliked on the element delButton
+    // Capture the event clicked on the element delButton
     this._elements.list.on('click', this._selectors.deleteButton, function() {
 
         // The View notifying (notify) Controller, 
@@ -132,7 +132,7 @@ var ListView = function(model, elements, selectors) {
         _this.delButtonClicked.notify();
     });
 
-    // Capture the event cliked on the element of list
+    // Capture the event clicked on the element of list
     this._elements.list.on('click', this._selectors.itemText, function(e) {
 
         clicks++;
@@ -149,7 +149,7 @@ var ListView = function(model, elements, selectors) {
             clicks = 0;
         }
 
-        // Capture the event double cliked on the element of list
+        // Capture the event double clicked on the element of list
     }).on('dblclick', this._selectors.itemText, function(e) {
         e.preventDefault();
 

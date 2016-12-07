@@ -9,8 +9,8 @@ var ListController = function(model, view) {
     // mouseover on the element of list (hover)
     this._view.listModified.attach(function(sender, args) {
 
-        // Calling the method Controller on captured event with the argument
-        // issued by this event (listModified)
+        // Elicitation the method Controller on intercepted event with the argument
+        // emitted by this event (listModified)
         _this.updateSelected(args.index);
     });
 
@@ -18,8 +18,8 @@ var ListController = function(model, view) {
     // clicked addButton
     this._view.addButtonClicked.attach(function(sender, args) {
 
-        // Calling the method Controller on captured event with the argument
-        // issued by this event (addButtonClicked)
+        // Elicitation the method Controller on intercepted event with the argument
+        // emitted by this event (addButtonClicked)
         _this.addItem(args.item);
     });
 
@@ -27,16 +27,16 @@ var ListController = function(model, view) {
     // clicked enter key on the element input
     this._view.inputEnterClicked.attach(function(sender, args) {
 
-        // Calling the method Controller on captured event with the argument
-        // issued by this event (inputEnterClicked)
+        // Elicitation the method Controller on intercepted event with the argument
+        // emitted by this event (inputEnterClicked)
         _this.addItem(args.item);
     });
 
     // Listening (interception) the event (Event) 
-    // kclicked delButton
+    // clicked delButton
     this._view.delButtonClicked.attach(function() {
 
-        // Calling the method Controller on captured event (delButtonClicked)
+        // Elicitation the method Controller on intercepted event (delButtonClicked)
         _this.delItem();
     });
 
@@ -44,7 +44,7 @@ var ListController = function(model, view) {
     // double clicked the element of list
     this._view.listItemDblclicked.attach(function() {
 
-        // Calling the method Controller on captured event (listItemDblclick)
+        // Elicitation the method Controller on intercepted event (listItemDblclick)
         _this.showInput();
     });
 
@@ -52,8 +52,8 @@ var ListController = function(model, view) {
     // clicked enter key on the element input
     this._view.inputEditEnterClicked.attach(function(sender, args) {
 
-        // Calling the method Controller on captured event with the argument
-        // issued by this event (inputEditEnterClicked)
+        // Elicitation the method Controller on intercepted event with the argument
+        // emitted by this event (inputEditEnterClicked)
         _this.EditItem(args.item);
     });
 
@@ -61,7 +61,7 @@ var ListController = function(model, view) {
     // clicked the element of list
     this._view.listItemClicked.attach(function() {
 
-        // Calling the method Controller on captured event (listItemClicked)
+        // Elicitation the method Controller on intercepted event (listItemClicked)
         _this.doneItem();
     });
 
@@ -69,8 +69,8 @@ var ListController = function(model, view) {
     // lost 'focus' on the element input
     this._view.inputEditFocusLost.attach(function(sender, args) {
 
-        // Calling the method Controller on captured event with the argument
-        // issued by this event (inputEditFocusLost)
+        // Elicitation the method Controller on intercepted event with the argument
+        // emitted by this event (inputEditFocusLost)
         _this.EditItem(args.item);
     });
 
@@ -81,7 +81,7 @@ ListController.prototype = {
 
         if (item) {
 
-            // Calling the method of Model addItem and delivering as an argument
+            // Elicitation the method of Model addItem and delivering as an argument
             // the value of input
             this._model.addItem(item);
         }
@@ -90,11 +90,11 @@ ListController.prototype = {
     delItem: function() {
         var index;
 
-        // The assignment to a variable active list item
+        // The ascription to a variable active item of list
         index = this._model.getSelectedIndex();
         if (index !== -1) {
 
-            // Calling the method of Model removeItemAt and delivering as an argument
+            // Elicitation the method of Model removeItemAt and delivering as an argument
             // the index of the element
             this._model.removeItemAt(this._model.getSelectedIndex());
         }
@@ -103,11 +103,11 @@ ListController.prototype = {
     showInput: function() {
         var index;
 
-        // The assignment to a variable active list item
+        // The ascription to a variable active item of list
         index = this._model.getSelectedIndex();
         if (index !== -1) {
 
-            // Calling the method of Model showInput and delivering as an argument
+            // Elicitation the method of Model showInput and delivering as an argument
             // the index of the element
             this._model.showInput(index);
         }
@@ -116,13 +116,13 @@ ListController.prototype = {
     EditItem: function(item) {
         var index;
 
-        // The assignment to a variable active list item
+        // The ascription to a variable active item of list
         index = this._model.getSelectedIndex();
         if (index !== -1) {
 
             if (item) {
 
-                // Calling the method of Model EditItem and delivering as an argument
+                // Elicitation the method of Model EditItem and delivering as an argument
                 // the index of the element and the value of input
                 this._model.EditItem(item, index);
             }
@@ -131,14 +131,14 @@ ListController.prototype = {
 
     doneItem: function() {
 
-        // Calling the method of Model doneItemAt and delivering as an argument
+        // Elicitation the method of Model doneItemAt and delivering as an argument
         // the index of the element
         this._model.doneItem();
     },
 
     updateSelected: function(index) {
 
-        // Calling the method of Model setSelectedIndex and delivering as an argument
+        // Elicitation the method of Model setSelectedIndex and delivering as an argument
         // the index of the element
         this._model.setSelectedIndex(index);
     }
