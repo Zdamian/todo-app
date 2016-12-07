@@ -28,6 +28,10 @@ var ListView = function(model, elements, selectors) {
     // gdy został wciśnięty klawisz enter na elemencie input
     this.inputEditEnterClicked = new Event(this);
 
+    // Event powiadamiający kontroler,
+    // gdy został utacony 'focus' na elemencie input
+    this.inputEditFocusLost = new Event(this);
+
     var _this = this,
         DELAY = 300,
         clicks = 0,
@@ -128,7 +132,7 @@ var ListView = function(model, elements, selectors) {
     });
 
     // Przechwycenie zdarzenia kliknięcie na element listy
-        this._elements.list.on('click', this._selectors.itemText, function(e) {
+    this._elements.list.on('click', this._selectors.itemText, function(e) {
 
         clicks++;
 
@@ -165,6 +169,18 @@ var ListView = function(model, elements, selectors) {
             });
         }
     });
+
+    // Przechwycenie zdarzenia utraty 'focus' na elemncie input
+    this._elements.list.on('blur', this._selectors.editInput, function(e) {
+
+        // Widok powiadamia (notify) kontroler,
+        // że zastał utracony 'focus' i w powiadomieniu wysyła
+        // wartość elementu input
+        _this.inputEditFocusLost.notify({
+            item: _this._elements.list.find(_this._selectors.editInput).val().trim()
+        });
+    });
+
 };
 
 ListView.prototype = {

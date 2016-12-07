@@ -67,6 +67,16 @@ var ListController = function(model, view) {
         // na przechwycone zdarzenie (listItemClicked)
         _this.doneItem();
     });
+
+    // Nasłuchiwanie (przechwycenie) zdarzenia (Event) 
+    // utraty 'focus' na elemencie input
+    this._view.inputEditFocusLost.attach(function(sender, args) {
+
+        // Wywołanie metody Kontrolera na przechwycone zdarzenie z argumentem
+        // wemitowanym przez to zdarzenie (inputEditFocusLost)
+        _this.EditItem(args.item);
+    });
+
 }
 
 ListController.prototype = {
