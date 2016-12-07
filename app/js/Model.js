@@ -2,26 +2,26 @@ var ListModel = function(items) {
     this._items = items;
     this._selectedIndex = -1;
 
-    // Zdarzenie (Event) emitowany do Widoku, że został dodany nowy element
+    // The event (Event) emitting to the view, that was added the new element
     this.itemAdded = new Event(this);
 
-    // Zdarzenie (Event) emitowany do Widoku, że został dodany nowy element
+    // The event (Event) emitting to the view, that was added the new element
     this.itemEdited = new Event(this);
 
-    // Zdarzenie (Event) emitowany do Widoku, że został usunięty element
+    // The event (Event) emitting to the view, that was deleted the element
     this.itemRemoved = new Event(this);
 
-    // Zdarzenie (Event) emitowany do Widoku, że został kliknięty element
+    // The event (Event) emitting to the view, that was clicked the element
     this.itemClicked = new Event(this);
 
-    // Zdarzenie (Event) emitowany do Widoku, że został kliknięty element
+    // The event (Event) emitting to the view, that was clicked the element
     this.inputShow = new Event(this);
 }
 
 ListModel.prototype = {
     getItems: function() {
 
-        // Zwraca tablicę elementów
+        // Return an array of elements
         return [].concat(this._items);
     },
 
@@ -40,27 +40,27 @@ ListModel.prototype = {
 
         var date = 'Task added: ' + day + "/" + month + "/" + year + " | " + hour + ":" + minute;
 
-        // Dostawienie nowego elementu do tablicy items
+        // Delivering the new element to the array of items
         this._items.push({
             text: item,
             done: false,
             dateAdded: date
         });
 
-        // Wysłanie powiadomienia do Widoku, że został dodany nowy element
+        // Sending notifications, that was added the new element
         this.itemAdded.notify({
-            item: item // Opcjonalne
+            item: item // Optional
         });
     },
 
     showInput: function(index) {
 
-        // Wysłanie indeksu elementu listy do Widoku
+        // Sending the index of item of the list to the View
         this.inputShow.notify({
             index: index 
         });
 
-        // Zerowanie ektywnego indeksu listy
+        // Resetting the active item of list
         this.setSelectedIndex(-1);
     },
 
@@ -68,29 +68,29 @@ ListModel.prototype = {
 
         var editText = item;
 
-        // Przypisanie nowego koloru 
+        // Assigning a new text 
         this._items[index].text = editText;
 
-        // Wysłanie powiadomienia do Widoku, że został dodany
-        // zedytowany element listy
+        // Sending notifications to the View, that was added
+        // edited item of list
         this.itemEdited.notify({
-            item: item // Opcjonalne
+            item: item // Optional
         });
     },
 
     removeItemAt: function(index) {
         var item;
 
-        // Usunięcie wybranego elementu z tablicy items
+        // Deleting the selected item from an array of items
         item = this._items[index];
         this._items.splice(index, 1);
 
-        // Wysłanie indeksu elementu listy do Widoku
+        // Sending the index of item of the list to the View
         this.itemRemoved.notify({
             index: index
         });
 
-        // Zerowanie ektywnego indeksu listy
+        // Resetting the active item of list
         this.setSelectedIndex(-1);
     },
 
@@ -98,7 +98,7 @@ ListModel.prototype = {
 
         this._items[this._selectedIndex].done = !this._items[this._selectedIndex].done;
 
-        // Wysłanie powiadomienia do Widoku, że element został zaznaczony 
+        // Sending notifications to the View, that was selected item 
         this.itemClicked.notify({
             done: this._items[this._selectedIndex].done
         });
@@ -106,13 +106,13 @@ ListModel.prototype = {
 
     getSelectedIndex: function() {
 
-        // Zwrócenie aktywnego indkesu elementu listy
+        // Return the index of the active element
         return this._selectedIndex;
     },
 
     setSelectedIndex: function(index) {
 
-        // Ustawienie aktywnego indeksu elementu listy
+        // Setting the index of the active element
         this._selectedIndex = index;
     }
 };

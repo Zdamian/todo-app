@@ -5,75 +5,72 @@ var ListController = function(model, view) {
     var _this = this;
 
 
-    // Nasłuchiwanie (przechwycenie) zdarzenia (Event) 
-    // najachenia kursora myszy na element listy (hover)
+    // Listening (interception) the event (Event) 
+    // mouseover on the element of list (hover)
     this._view.listModified.attach(function(sender, args) {
 
-        // Wywołanie metody Kontrolera na przechwycone zdarzenie z argumentem
-        // wemitowanym przez to zdarzenie (listModified)
+        // Calling the method Controller on captured event with the argument
+        // issued by this event (listModified)
         _this.updateSelected(args.index);
     });
 
-    // Nasłuchiwanie (przechwycenie) zdarzenia (Event) 
-    // kliknięcia przycisku addButton
+    // Listening (interception) the event (Event) 
+    // clicked addButton
     this._view.addButtonClicked.attach(function(sender, args) {
 
-        // Wywołanie metody Kontrolera na przechwycone zdarzenie z argumentem
-        // wemitowanym przez to zdarzenie (addButtonClicked)
+        // Calling the method Controller on captured event with the argument
+        // issued by this event (addButtonClicked)
         _this.addItem(args.item);
     });
 
-    // Nasłuchiwanie (przechwycenie) zdarzenia (Event) 
-    // wciśnięcia klawisza enter na elemencie input
+    // Listening (interception) the event (Event) 
+    // clicked enter key on the element input
     this._view.inputEnterClicked.attach(function(sender, args) {
 
-        // Wywołanie metody Kontrolera na przechwycone zdarzenie z argumentem
-        // wemitowanym przez to zdarzenie (inputEnterClicked)
+        // Calling the method Controller on captured event with the argument
+        // issued by this event (inputEnterClicked)
         _this.addItem(args.item);
     });
 
-    // Nasłuchiwanie (przechwycenie) zdarzenia (Event) 
-    // kliknięcia przycisku delButton
+    // Listening (interception) the event (Event) 
+    // kclicked delButton
     this._view.delButtonClicked.attach(function() {
 
-        // Wywołanie metody Kontrolera
-        // na przechwycone zdarzenie (delButtonClicked)
+        // Calling the method Controller on captured event (delButtonClicked)
         _this.delItem();
     });
 
-    // Nasłuchiwanie (przechwycenie) zdarzenia (Event) 
-    // podwójnego kliknięcia elementu listy
+    // Listening (interception) the event (Event) 
+    // double clicked the element of list
     this._view.listItemDblclicked.attach(function() {
 
-        // Wywołanie metody Kontrolera
-        // na przechwycone zdarzenie (listItemDblclick)
+        // Calling the method Controller on captured event (listItemDblclick)
         _this.showInput();
     });
 
-    // Nasłuchiwanie (przechwycenie) zdarzenia (Event) 
-    // wciśnięcia klawisza enter na elemencie input
+    // Listening (interception) the event (Event) 
+    // clicked enter key on the element input
     this._view.inputEditEnterClicked.attach(function(sender, args) {
 
-        // Wywołanie metody Kontrolera na przechwycone zdarzenie z argumentem
-        // wemitowanym przez to zdarzenie (inputEditEnterClicked)
+        // Calling the method Controller on captured event with the argument
+        // issued by this event (inputEditEnterClicked)
         _this.EditItem(args.item);
     });
 
-    // Nasłuchiwanie (przechwycenie) zdarzenia (Event) 
-    // kliknięcia elementu listy
+    // Listening (interception) the event (Event) 
+    // clicked the element of list
     this._view.listItemClicked.attach(function() {
 
-        // Wywołanie metody Kontrolera
-        // na przechwycone zdarzenie (listItemClicked)
+        // Calling the method Controller on captured event (listItemClicked)
         _this.doneItem();
     });
 
-    // Nasłuchiwanie (przechwycenie) zdarzenia (Event) 
-    // utraty 'focus' na elemencie input
+    // Listening (interception) the event (Event) 
+    // lost 'focus' on the element input
     this._view.inputEditFocusLost.attach(function(sender, args) {
 
-        // Wywołanie metody Kontrolera na przechwycone zdarzenie z argumentem
-        // wemitowanym przez to zdarzenie (inputEditFocusLost)
+        // Calling the method Controller on captured event with the argument
+        // issued by this event (inputEditFocusLost)
         _this.EditItem(args.item);
     });
 
@@ -84,8 +81,8 @@ ListController.prototype = {
 
         if (item) {
 
-            // Wywołanie metody Modelu addItem i przekazanie jako argument
-            // przechwyconej przez Widok wartości inputa
+            // Calling the method of Model addItem and delivering as an argument
+            // the value of input
             this._model.addItem(item);
         }
     },
@@ -93,12 +90,12 @@ ListController.prototype = {
     delItem: function() {
         var index;
 
-        // Przypisanie do zmiennej aktywnego elementu listy
+        // The assignment to a variable active list item
         index = this._model.getSelectedIndex();
         if (index !== -1) {
 
-            // Wywołanie metody Modelu removeItemAt i przekazanie
-            // jako argument indeks elementu
+            // Calling the method of Model removeItemAt and delivering as an argument
+            // the index of the element
             this._model.removeItemAt(this._model.getSelectedIndex());
         }
     },
@@ -106,12 +103,12 @@ ListController.prototype = {
     showInput: function() {
         var index;
 
-        // Przypisanie do zmiennej aktywnego elementu listy
+        // The assignment to a variable active list item
         index = this._model.getSelectedIndex();
         if (index !== -1) {
 
-            // Wywołanie metody Modelu showInput i przekazanie
-            // jako argument indeks elementu
+            // Calling the method of Model showInput and delivering as an argument
+            // the index of the element
             this._model.showInput(index);
         }
     },
@@ -119,14 +116,14 @@ ListController.prototype = {
     EditItem: function(item) {
         var index;
 
-        // Przypisanie do zmiennej aktywnego elementu listy
+        // The assignment to a variable active list item
         index = this._model.getSelectedIndex();
         if (index !== -1) {
 
             if (item) {
 
-                // Wywołanie metody Modelu EditItem i przekazanie jako argument
-                // przechwyconej przez Widok wartości inputa i indeks elementu listy
+                // Calling the method of Model EditItem and delivering as an argument
+                // the index of the element and the value of input
                 this._model.EditItem(item, index);
             }
         }
@@ -134,15 +131,15 @@ ListController.prototype = {
 
     doneItem: function() {
 
-        // Wywołanie metody Modelu doneItemAt i przekazanie
-        // jako argument indeks elementu
+        // Calling the method of Model doneItemAt and delivering as an argument
+        // the index of the element
         this._model.doneItem();
     },
 
     updateSelected: function(index) {
 
-        // Wywołanie metody Modelu setSelectedIndex i przekazanie
-        // jako argument indeks elementu listy na jakim był hover
+        // Calling the method of Model setSelectedIndex and delivering as an argument
+        // the index of the element
         this._model.setSelectedIndex(index);
     }
 };
