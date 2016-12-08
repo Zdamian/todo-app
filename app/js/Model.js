@@ -2,26 +2,26 @@ var ListModel = function(items) {
     this._items = items;
     this._selectedIndex = -1;
 
-    // The event (Event) emitting to the view, that was added the new element
+    // Emit the Event added the item to the View
     this.itemAdded = new Event(this);
 
-    // The event (Event) emitting to the view, that was edited the new element
+    // Emit the Event edited the item to the View
     this.itemEdited = new Event(this);
 
-    // The event (Event) emitting to the view, that was deleted the element
+    // Emit the Event deleted the item to the View
     this.itemRemoved = new Event(this);
 
-    // The event (Event) emitting to the view, that was clicked the element
+    // Emit the Event clicked the item to the View
     this.itemClicked = new Event(this);
 
-    // The event (Event) emitting to the view, that was clicked the element
+    // Emit the Event clicked the item to the View
     this.inputShow = new Event(this);
 }
 
 ListModel.prototype = {
     getItems: function() {
 
-        // Return an array of elements
+        // Return the array of elements
         return [].concat(this._items);
     },
 
@@ -40,14 +40,14 @@ ListModel.prototype = {
 
         var date = 'Task added: ' + day + "/" + month + "/" + year + " | " + hour + ":" + minute;
 
-        // Delivering the new element to the array of items
+        // Push the new item to the items array
         this._items.push({
             text: item,
             done: false,
             dateAdded: date
         });
 
-        // Sending notifications, that was added the new element
+        // Notify View that the new item has been added
         this.itemAdded.notify({
             item: item // Optional
         });
@@ -55,12 +55,12 @@ ListModel.prototype = {
 
     showInput: function(index) {
 
-        // Sending the index of item of the list to the View
+        // Emit the item list index to the View
         this.inputShow.notify({
             index: index 
         });
 
-        // Resetting the active item of list
+        // Reset the active item list index
         this.setSelectedIndex(-1);
     },
 
@@ -68,11 +68,10 @@ ListModel.prototype = {
 
         var editText = item;
 
-        // Ascription a new text 
+        // Assign a new text 
         this._items[index].text = editText;
 
-        // Sending notifications to the View, that was added
-        // edited item of list
+        // Emit edited the item list to the View
         this.itemEdited.notify({
             item: item // Optional
         });
@@ -81,16 +80,16 @@ ListModel.prototype = {
     removeItemAt: function(index) {
         var item;
 
-        // Deleting the selected item from an array of items
+        // Delete selected item from items array
         item = this._items[index];
         this._items.splice(index, 1);
 
-        // Sending the index of item of the list to the View
+        // Emit the item list index to the View
         this.itemRemoved.notify({
             index: index
         });
 
-        // Resetting the active item of list
+        // Reset the active item list index
         this.setSelectedIndex(-1);
     },
 
@@ -98,7 +97,7 @@ ListModel.prototype = {
 
         this._items[this._selectedIndex].done = !this._items[this._selectedIndex].done;
 
-        // Sending notifications to the View, that was selected item 
+        // Emit, that was selected item to the View
         this.itemClicked.notify({
             done: this._items[this._selectedIndex].done
         });
@@ -106,13 +105,13 @@ ListModel.prototype = {
 
     getSelectedIndex: function() {
 
-        // Return the index of the active element
+        // Return the active list item index
         return this._selectedIndex;
     },
 
     setSelectedIndex: function(index) {
 
-        // Setting the index of the active element
+        // Set the active list item
         this._selectedIndex = index;
     }
 };

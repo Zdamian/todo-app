@@ -3,33 +3,36 @@ var ListView = function(model, elements, selectors) {
     this._elements = elements;
     this._selectors = selectors;
 
-    // The Event notifying Controller, when the cursor
-    // was on the item of list (hover)
+    // Emit the Event, when the cursor
+    // was on the item to the Controller
     this.listModified = new Event(this);
 
-    // The Event notifying Controller, when was clicked the element addButton
+    // Emit the Event, when was clicked
+    // the item to the Controller
     this.addButtonClicked = new Event(this);
 
-    // The Event notifying Controller,
-    // when was clicked 'Enter' on the item 'input'
+    // Emit the Event, when was clicked 'Enter'
+    // on the item to the Controller
     this.inputEnterClicked = new Event(this);
 
-    // The Event notifying Controller, when was clicked the element delButton
+    // Emit the Event, when was clicked 
+    // the item to the Controller
     this.delButtonClicked = new Event(this);
 
-    // The Event notifying Controller, when was clicked the item of list
+    // Emit the Event, when was clicked
+    // the item to the Controller
     this.listItemClicked = new Event(this);
 
-    // The Event notifying Controller, 
-    // when was double clicked the item of list
+    // Emit the Event, when was double clicked
+    // the item to the Controller
     this.listItemDblclicked = new Event(this);
 
-    // The Event notifying Controller,
-    // when was clicked 'Enter' on the item 'input'
+    // Emit the Event, when was clicked
+    // the item to the Controller
     this.inputEditEnterClicked = new Event(this);
 
-    // The Event notifying Controller,
-    // when was lost 'focus' on the item 'input'
+    // Emit the Event, when was blur
+    // on the item to the Controller
     this.inputEditFocusLost = new Event(this);
 
     var _this = this,
@@ -39,100 +42,92 @@ var ListView = function(model, elements, selectors) {
 
     // attach model listeners
 
-    // Listening to the event (Event) emitting by Model,
-    // that was added the new element and joined (attach)
-    // function on this event
+    // Emitted the event by Model, that was added the new element and attach
+    // function for this event
     this._model.itemAdded.attach(function() {
 
-        // Refreshing view
+        // Refresh view
         _this.render('Item added!');
     });
 
-    // Listening to the event (Event) emitting by Model,
-    // that was edited the element and joined (attach)
-    // function on this event
+    // Emitted the event by Model, that was edited the element and attach
+    // function for this event
     this._model.itemEdited.attach(function() {
 
-        // Refreshing view
+        // Refresh view
         _this.render('Item edited!');
     });
 
-    // Listening to the event (Event) emitting by Model,
-    // that was deleted the element and joined (attach)
-    // function on this event
+    // Emitted the event by Model, that was deleted the element and attach
+    // function for this event
     this._model.itemRemoved.attach(function(sender, args) {
 
-        // Refreshing view
+        // Refresh view
         _this.removedItem('Item removed!', args.index);
     });
 
-    // Listening to the event (Event) emitting by Model,
-    // that was edited the element and joined (attach)
-    // function on this event
+    // Emitted the event by Model, that was edited the element and attach
+    // function for this event
     this._model.inputShow.attach(function(sender, args) {
 
-        // Refreshing view
+        // Refresh view
         _this.inputShow(args.index);
     });
 
-    // Listening to the event (Event) emitting by Model,
-    // that was selected the element and joined (attach)
-    // function on this event
+    // Emitted the event by Model, that was selected the element and attach
+    // function for this event
     this._model.itemClicked.attach(function(sender, args) {
 
         var message = args.done ? 'Task completed!' : 'Task uncompleted!';
 
-        // Refreshing view
+        // Refresh view
         _this.render(message);
     });
 
     // attach listeners to HTML controls
 
-    // Capture the event 'mouseover' on the element of list (hover)
+    // Item list mouseover event handler
     this._elements.list.on('mouseover', this._selectors.listItem, function() {
         var _self = this;
 
-        // The View notifying (notify) Controller,
-        // that cursor was on the element of list and in the notification sending
-        // index this element
+        // Notify Controller, that cursor was on the element of list
+        // and in the notification send the item list index
         _this.listModified.notify({
             index: $(_self).prevAll().length
         });
     });
 
-    // Capture the event clicked on the element addButton
+    // Item list clicked addButton event handler
     this._elements.addButton.on('click', function() {
 
-        // The View notifying (notify) Controller,
-        // that addButton was clicked and in the notification sending
-        // the value of input
+        // Notify Controller, that addButton was clicked
+        // and in the notification send the value of input
         _this.addButtonClicked.notify({
             item: _this._elements.input.val().trim()
         });
     });
 
-    // Capture the event clicked enter key on the element input
+    // Item list clicked enter key event handler
     this._elements.input.on('keyup', function(e) {
         if (e.keyCode === 13) {
 
-            // The View notifying (notify) Controller,
-            // that enter key was clicked and in the notification sending
-            // the value of input
+            // Notify Controller, that enter key was clicked
+            // and in the notification sending the value of input
             _this.inputEnterClicked.notify({
                 item: _this._elements.input.val().trim()
             });
         }
     });
 
-    // Capture the event clicked on the element delButton
+    // Item list clicked delButton event handler
     this._elements.list.on('click', this._selectors.deleteButton, function() {
 
-        // The View notifying (notify) Controller, 
+        // Notify Controller, 
         // that delButton was clicked
         _this.delButtonClicked.notify();
     });
 
-    // Capture the event clicked on the element of list
+    // Item list clicked event handler
     this._elements.list.on('click', this._selectors.itemText, function(e) {
 
         clicks++;
@@ -149,34 +144,32 @@ var ListView = function(model, elements, selectors) {
             clicks = 0;
         }
 
-        // Capture the event double clicked on the element of list
+        // Item list double clicked event handler
     }).on('dblclick', this._selectors.itemText, function(e) {
         e.preventDefault();
 
-        // The View notifying (notify) Controller, 
-        // that was double clicked the element of list
+        // Notify Controller, 
+        // that was double clicked the list item
         _this.listItemDblclicked.notify();
     });
 
-    // Capture the event clicked enter key on the element input
+    // Item list clicked enter key event handler
     this._elements.list.on('keyup', this._selectors.editInput, function(e) {
         if (e.keyCode === 13) {
 
-            // The View notifying (notify) Controller,
-            // that enter key was clicked and in the notification sending
-            // the value of input
+            // Notify Controller, that enter key was clicked
+            // and in the notification send the value of input
             _this.inputEditEnterClicked.notify({
                 item: _this._elements.list.find(_this._selectors.editInput).val().trim()
             });
         }
     });
 
-    // Capture the event blur on the element of list
+    // Item list blur event handler
     this._elements.list.on('blur', this._selectors.editInput, function(e) {
 
-        // The View notifying (notify) Controller,
-        // that was lost 'focus' and in the notification sending
-        // the value of input
+        // Notify Controller, that was blur and
+        // in the notification send the value of input
         _this.inputEditFocusLost.notify({
             item: _this._elements.list.find(_this._selectors.editInput).val().trim()
         });
